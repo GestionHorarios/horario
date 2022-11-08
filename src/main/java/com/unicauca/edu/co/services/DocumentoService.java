@@ -1,5 +1,15 @@
 package com.unicauca.edu.co.services;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,7 +27,26 @@ public class DocumentoService {
 							   // nombre del archivo	//lo spliteo por(.) como puede tener varios . en el nombre solo uso la ultima posición
 			String extension = file.getOriginalFilename().split("\\.")[file.getOriginalFilename().split("\\.").length-1];
 			if(extension.equals("xlsx")) {
-				
+				try {
+					File convertFile = new File(System.getProperty("java.io.tmpdir")+"/"+file.getOriginalFilename());
+					file.transferTo(convertFile);
+					InputStream inp = new FileInputStream(convertFile);
+					Workbook wb = WorkbookFactory.create(inp);
+					Sheet sheet = wb.getSheetAt(0);
+					int irow = 0;
+					Row row = sheet.getRow(irow);
+					while(row!=null) {
+						Cell cell = row.getCell(1);
+						String value = cell.getStringCellValue()+" ";
+						System.out.println("Valor de la celda es "+value);
+						irow++;
+						row = sheet.getRow(irow);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.setMetadata("Respuesta nok", "-1", "Se lanzo una excepcion");
+					return new ResponseEntity<Object> (response, HttpStatus.INTERNAL_SERVER_ERROR);
+				}
 			}
 //fin espacio para trabajar file 
 			response.setMetadata("Respuesta ok", "00", "Si hay archivo");
