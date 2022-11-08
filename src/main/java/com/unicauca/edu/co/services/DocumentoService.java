@@ -26,6 +26,7 @@ public class DocumentoService {
 //esparcio para trabajar file que es el archivo
 							   // nombre del archivo	//lo spliteo por(.) como puede tener varios . en el nombre solo uso la ultima posición
 			String extension = file.getOriginalFilename().split("\\.")[file.getOriginalFilename().split("\\.").length-1];
+			System.out.println("archivo "+file.getOriginalFilename());
 			if(extension.equals("xlsx")) {
 				try {
 					File convertFile = new File(System.getProperty("java.io.tmpdir")+"/"+file.getOriginalFilename());
@@ -35,12 +36,18 @@ public class DocumentoService {
 					Sheet sheet = wb.getSheetAt(0);
 					int irow = 0;
 					Row row = sheet.getRow(irow);
+					
 					while(row!=null) {
+						if(row.getCell(1) == null) {
+							break;
+						}
 						Cell cell = row.getCell(1);
-						String value = cell.getStringCellValue()+" ";
+						String value = cell.getStringCellValue();
+						
 						System.out.println("Valor de la celda es "+value);
 						irow++;
 						row = sheet.getRow(irow);
+						
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
