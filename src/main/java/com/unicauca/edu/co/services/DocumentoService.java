@@ -2,7 +2,6 @@ package com.unicauca.edu.co.services;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -44,7 +43,7 @@ public class DocumentoService {
 						Cell cell = row.getCell(1);
 						String value = cell.getStringCellValue();
 						
-						System.out.println("Valor de la celda es "+value);
+						System.out.println(" "+value);
 						irow++;
 						row = sheet.getRow(irow);
 						
@@ -64,5 +63,4 @@ public class DocumentoService {
 		}
 		return new ResponseEntity<Object> (response, HttpStatus.OK);
 	}
-	
 }
