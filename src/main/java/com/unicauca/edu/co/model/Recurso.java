@@ -2,7 +2,6 @@ package com.unicauca.edu.co.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,18 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="recursos")
+@Table(name="recurso")
 public class Recurso implements Serializable{
 
+	//prueba de cambio 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Rec_Id")
 	private Long rec_id;
 	private String rec_codigo;
 	private String rec_descripcion;
 	private String rec_tipo;
+	
 	public Long getRec_id() {
 		return rec_id;
 	}
