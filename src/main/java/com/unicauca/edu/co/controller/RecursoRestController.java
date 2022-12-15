@@ -19,7 +19,7 @@ import com.unicauca.edu.co.services.IRecursoService;
 @CrossOrigin(origins = {"http://192.168.101.11:4200/","http://localhost:4200/"})
 @RestController
 @RequestMapping("/api/v1")
-public class RecursoController {
+public class RecursoRestController {
 	
 	@Autowired
 	private IRecursoService recursoService;

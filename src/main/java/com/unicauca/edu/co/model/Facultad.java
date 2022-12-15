@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="asignacion")
+@Table(name="facultad")
 public class Facultad implements Serializable{
 
 	private static final long serialVersionUID = 1L;
