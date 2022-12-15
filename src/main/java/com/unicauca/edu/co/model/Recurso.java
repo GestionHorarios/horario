@@ -27,7 +27,7 @@ public class Recurso implements Serializable{
 	private String rec_descripcion;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Ubicacion ubicacion;
 	
 	public Long getRec_id() {
@@ -59,6 +59,12 @@ public class Recurso implements Serializable{
 	}
 	public void setRec_descripcion(String rec_descripcion) {
 		this.rec_descripcion = rec_descripcion;
+	}
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 	
 }

@@ -21,12 +21,15 @@ public class RecursoServiceImpl implements IRecursoService{
 	private IRecursoDao recursoDao;
 
 	@Override
-	@Transactional
+	@Transactional (readOnly = true)
 	public ResponseEntity<RecursoResponseRest> listar() {
+		System.out.println("listando recursos");
 		RecursoResponseRest response = new RecursoResponseRest();
 		try {
 			List<Recurso> recurso = (List<Recurso>) recursoDao.findAll();
-			
+			for (Recurso r : recurso) {
+				System.out.println("ubicacion ");
+			}
 			response.getRecursoResponse().setRecurso(recurso);
 			response.setMetadata("Respuesta ok", "00", "Respuesta exitosa");
 		}catch (Exception e) {
