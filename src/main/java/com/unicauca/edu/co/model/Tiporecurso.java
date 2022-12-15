@@ -3,8 +3,12 @@ package com.unicauca.edu.co.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tiporecurso")
@@ -15,7 +19,9 @@ public class Tiporecurso implements Serializable{
 	@Id
 	private String rectipo_codigo;
 	private String rectipo_nombre;
-	private String rectipo_codigo_padre;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	private Tiporecurso tiporecurso;
 
 	public String getRectipo_codigo() {
 		return rectipo_codigo;
@@ -29,11 +35,11 @@ public class Tiporecurso implements Serializable{
 	public void setRectipo_nombre(String rectipo_nombre) {
 		this.rectipo_nombre = rectipo_nombre;
 	}
-	public String getRectipo_codigo_padre() {
-		return rectipo_codigo_padre;
+	public Tiporecurso getTiporecurso() {
+		return tiporecurso;
 	}
-	public void setRectipo_codigo_padre(String rectipo_codigo_padre) {
-		this.rectipo_codigo_padre = rectipo_codigo_padre;
+	public void setTiporecurso(Tiporecurso tiporecurso) {
+		this.tiporecurso = tiporecurso;
 	}
 	
 }
