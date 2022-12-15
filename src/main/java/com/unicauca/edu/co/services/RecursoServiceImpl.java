@@ -91,7 +91,7 @@ public class RecursoServiceImpl implements IRecursoService{
 			if(recursoSearch.isPresent()) {
 				recursoSearch.get().setRec_codigo(recurso.getRec_codigo());
 				recursoSearch.get().setRec_descripcion(recurso.getRec_descripcion());
-				recursoSearch.get().setRec_tipo(recurso.getRec_tipo());
+
 				
 				Recurso recusoUpdate = recursoDao.save(recursoSearch.get());
 				if(recusoUpdate != null) {
