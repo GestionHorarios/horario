@@ -17,10 +17,13 @@ public class Tiporecurso implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	//@JsonBackReference//evita traer el atributo del codigo
 	private String rectipo_codigo;
 	private String rectipo_nombre;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	//@JsonBackReference//evita traer el padre
+	//@JsonManagedReference
 	private Tiporecurso tiporecurso;
 
 	public String getRectipo_codigo() {

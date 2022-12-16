@@ -1,5 +1,7 @@
 package com.unicauca.edu.co.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unicauca.edu.co.model.Recurso;
@@ -40,8 +43,23 @@ public class RecursoRestController {
 	
 	//guardamos un recurso
 	@PostMapping("/recursos")
-	public ResponseEntity<RecursoResponseRest> guardarRecurso(@RequestBody Recurso recurso){
-		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso);
+	public ResponseEntity<RecursoResponseRest> guardarRecurso(
+			@RequestParam("rec_codigo") String rec_codigo,
+			@RequestParam("rectipo_codigo")String rectipo_codigo,
+			@RequestParam("fac_codigo") String fac_codigo,
+			@RequestParam("rec_capmax") int capmax,
+			@RequestParam("rec_nombre") String rec_nombre,
+			@RequestParam("rec_decripcion")String rec_descripcion,
+			@RequestParam("ubi_codigo") String ubi_codigo
+			) throws IOException
+	{
+		System.out.println("recibiendo los datos");
+		Recurso recurso = new Recurso();
+		recurso.setRec_codigo(rec_codigo);
+		recurso.setRec_capmax(capmax);
+		recurso.setRec_nombre(rec_nombre);
+		recurso.setRec_descripcion(rec_descripcion);
+		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo,ubi_codigo);
 		return response;
 	}
 

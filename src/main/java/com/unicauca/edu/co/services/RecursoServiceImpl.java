@@ -10,8 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.unicauca.edu.co.dao.IFacultadDao;
 import com.unicauca.edu.co.dao.IRecursoDao;
+import com.unicauca.edu.co.dao.ITipoRecursoDao;
+import com.unicauca.edu.co.dao.IUbicacionDao;
+import com.unicauca.edu.co.model.Facultad;
 import com.unicauca.edu.co.model.Recurso;
+import com.unicauca.edu.co.model.Tiporecurso;
+import com.unicauca.edu.co.model.Ubicacion;
 import com.unicauca.edu.co.response.RecursoResponseRest;
 
 @Service
@@ -19,6 +25,15 @@ public class RecursoServiceImpl implements IRecursoService{
 	
 	@Autowired
 	private IRecursoDao recursoDao;
+	
+	@Autowired
+	private ITipoRecursoDao tipoRecursoDao;
+	
+	@Autowired
+	private IFacultadDao facultadDao;
+	
+	@Autowired
+	private IUbicacionDao ubicacionDao;
 
 	@Override
 	@Transactional (readOnly = true)
@@ -60,10 +75,24 @@ public class RecursoServiceImpl implements IRecursoService{
 	}
 
 	@Override
-	public ResponseEntity<RecursoResponseRest> guardar(Recurso recurso) {
+	public ResponseEntity<RecursoResponseRest> guardar(Recurso recurso, String rectipo_codigo, String fac_codigo, String ubi_codigo) {
 		RecursoResponseRest response = new RecursoResponseRest();
 		List<Recurso> list = new ArrayList<>();
 		try {
+			
+			Optional<Tiporecurso> tiporecurso = tipoRecursoDao.findById(rectipo_codigo);
+			Optional<Facultad> facultad = facultadDao.findById(fac_codigo);
+			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
+			
+			if(tiporecurso.isPresent() && facultad.isPresent() && ubicacion.isPresent()) {
+				recurso.setTiporecurso(tiporecurso.get());
+				recurso.setFacultad(facultad.get());;
+				recurso.setUbicacion(ubicacion.get());
+			}else {
+				response.setMetadata("respuesta ok", "-1" ,"Tipo recurso, Facultad, Ubicacion no se encuentra");
+				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.NOT_FOUND);
+			}
+			
 			Recurso recursoSave = recursoDao.save(recurso);
 			if(recursoSave!= null) {
 				list.add(recursoSave);
