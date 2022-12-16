@@ -3,8 +3,12 @@ package com.unicauca.edu.co.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="facultad")
@@ -15,7 +19,9 @@ public class Facultad implements Serializable{
 	@Id
 	private String fac_codigo;
 	private String fac_nombre;
-	private String ubi_codigo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	private Ubicacion ubicacion;
 
 	public String getFac_codigo() {
 		return fac_codigo;
@@ -29,11 +35,11 @@ public class Facultad implements Serializable{
 	public void setFac_nombre(String fac_nombre) {
 		this.fac_nombre = fac_nombre;
 	}
-	public String getUbi_codigo() {
-		return ubi_codigo;
+	public Ubicacion getUbicacion() {
+		return ubicacion;
 	}
-	public void setUbi_codigo(String ubi_codigo) {
-		this.ubi_codigo = ubi_codigo;
+	public void setUbicacion(Ubicacion ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 	
 }
