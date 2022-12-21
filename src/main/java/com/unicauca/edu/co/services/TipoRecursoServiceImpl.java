@@ -23,7 +23,16 @@ public class TipoRecursoServiceImpl implements ITipoRecursoService{
 	
 	@Override
 	public ResponseEntity<TipoRecursoResponseRest> listar() {
-		return null;
+		TipoRecursoResponseRest response = new TipoRecursoResponseRest();
+		try {
+			List<Tiporecurso> recurso = (List<Tiporecurso>) tiporecursoDao.findAll();
+			response.getTiporecursoResponse().setTiporecurso(recurso);
+			response.setMetadata("Respuesta ok", "00", "Respuesta exitosa");
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "Error al consultar");
+			return new ResponseEntity<TipoRecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<TipoRecursoResponseRest>(response, HttpStatus.OK);
 	}
 
 	@Override

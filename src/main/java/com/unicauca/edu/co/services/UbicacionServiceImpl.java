@@ -1,6 +1,8 @@
 package com.unicauca.edu.co.services;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +37,23 @@ public class UbicacionServiceImpl implements IUbicacionService {
 
 	@Override
 	public ResponseEntity<UbicacionResponseRest> buscarById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		UbicacionResponseRest response = new UbicacionResponseRest();
+		List<Ubicacion> list = new ArrayList<>();
+		try {
+			Optional<Ubicacion> ubicacion = ubicacionDao.findById(id);
+			if(ubicacion.isPresent()) {
+				list.add(ubicacion.get());
+				response.getUbicacionResponse().setUbicacion(list);
+				response.setMetadata("Respuesta ok","00", "Ubicacion encontrada");
+			}else {
+				response.setMetadata("Respuesta nok","-1", "Ubicacion no encontrada");
+				return new ResponseEntity<UbicacionResponseRest>(response, HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+			return new ResponseEntity<UbicacionResponseRest>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<UbicacionResponseRest>(response,HttpStatus.OK);
 	}
 
 	@Override
