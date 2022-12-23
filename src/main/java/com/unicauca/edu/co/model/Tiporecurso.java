@@ -22,9 +22,10 @@ public class Tiporecurso implements Serializable{
 	private String rectipo_nombre;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	private Tiporecurso tiporecurso;
 	//@JsonBackReference//evita traer el padre
 	//@JsonManagedReference
-	private Tiporecurso tiporecurso;
+	
 
 	public String getRectipo_codigo() {
 		return rectipo_codigo;

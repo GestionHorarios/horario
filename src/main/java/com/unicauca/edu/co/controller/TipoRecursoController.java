@@ -27,9 +27,15 @@ public class TipoRecursoController {
 	}
 	
 	//buscar tiporecurso por id
-	@GetMapping("/tiporecursos/{id}")
-	private ResponseEntity<TipoRecursoResponseRest> buscarPorId(@PathVariable String id){
-		ResponseEntity<TipoRecursoResponseRest> response = tiporecursoService.buscarById(id);
+	@GetMapping("/tiporecursos/{cod_tiporecurso}")
+	private ResponseEntity<TipoRecursoResponseRest> buscarPorId(@PathVariable String cod_tiporecurso){
+		ResponseEntity<TipoRecursoResponseRest> response = tiporecursoService.buscarById(cod_tiporecurso);
+		return response;
+	}
+	
+	@GetMapping("/hijostiporecursos/{cod_padre_tiporecurso}")
+	public ResponseEntity<TipoRecursoResponseRest> buscarHijosPorCodPadre(@PathVariable String cod_padre_tiporecurso){
+		ResponseEntity<TipoRecursoResponseRest> response = tiporecursoService.listarHijosDePadreByCodPadre(cod_padre_tiporecurso);
 		return response;
 	}
 }

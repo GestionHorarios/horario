@@ -2,15 +2,16 @@ package com.unicauca.edu.co.services;
 
 import org.springframework.http.ResponseEntity;
 
-import com.unicauca.edu.co.model.Recurso;
+import com.unicauca.edu.co.model.Tiporecurso;
 import com.unicauca.edu.co.response.TipoRecursoResponseRest;
 
 public interface ITipoRecursoService {
 	
 	public ResponseEntity<TipoRecursoResponseRest> listar();
-	public ResponseEntity<TipoRecursoResponseRest> buscarById(String id);
-	public ResponseEntity<TipoRecursoResponseRest> guardar(Recurso recurso, String rectipo_codigo, String fac_codigo, String ubi_codigo);
-	public ResponseEntity<TipoRecursoResponseRest> actualizar(Recurso recurso, Long id);
-	public ResponseEntity<TipoRecursoResponseRest> eliminarById(Long id);
-
+	public ResponseEntity<TipoRecursoResponseRest> buscarById(String cod_tiporecurso);
+	public ResponseEntity<TipoRecursoResponseRest> guardar(Tiporecurso tiporecurso, String cod_tiporecurso_padre);
+	public ResponseEntity<TipoRecursoResponseRest> actualizar(Tiporecurso tiporecurso, String cod_tiporecurso_padre);
+	public ResponseEntity<TipoRecursoResponseRest> eliminarById(Long cod_tiporecurso);
+	public ResponseEntity<TipoRecursoResponseRest> listarHijosDePadreByCodPadre(String cod_tiporecurso_padre);
+	
 }

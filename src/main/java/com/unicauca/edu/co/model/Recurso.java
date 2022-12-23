@@ -102,4 +102,7 @@ public class Recurso implements Serializable{
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+
+	
+
 }
