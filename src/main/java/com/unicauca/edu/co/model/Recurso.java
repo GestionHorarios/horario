@@ -1,12 +1,17 @@
 package com.unicauca.edu.co.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -38,6 +43,24 @@ public class Recurso implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Ubicacion ubicacion;
+	
+	/*
+	@JoinTable(name = "asignacion",
+			joinColumns = { @JoinColumn(name = "fk_recursoUno")},
+			inverseJoinColumns = {@JoinColumn(name = "fk_recursoDos")})*/
+	@JoinTable(name = "asignacion",
+			joinColumns = @JoinColumn(name = "rec_codigo", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "rec_codigo2", nullable = false)
+	)
+	//targetEntity = Recurso.class,
+	@ManyToMany(cascade = CascadeType.ALL)
+	List<Recurso> recursoUno;
+	
+	//,
+	//fetch= FetchType.LAZY
+	@ManyToMany(mappedBy= "recursoUno")
+	List<Recurso> recursoDos;
+	
 
 	public Long getRec_id() {
 		return rec_id;
@@ -103,6 +126,20 @@ public class Recurso implements Serializable{
 		this.ubicacion = ubicacion;
 	}
 
-	
+	public List<Recurso> getRecursoUno() {
+		return recursoUno;
+	}
+
+	public void setRecursoUno(List<Recurso> recursoUno) {
+		this.recursoUno = recursoUno;
+	}
+
+	public List<Recurso> getRecursoDos() {
+		return recursoDos;
+	}
+
+	public void setRecursoDos(List<Recurso> recursoDos) {
+		this.recursoDos = recursoDos;
+	}
 
 }
