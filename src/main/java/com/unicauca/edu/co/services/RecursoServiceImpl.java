@@ -110,15 +110,32 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest> (response, HttpStatus.OK);
 	}
 
+	//actualizar recurso
 	@Override
-	public ResponseEntity<RecursoResponseRest> actualizar(Recurso recurso, Long id) {
+	public ResponseEntity<RecursoResponseRest> actualizar(Recurso recurso, Long idRecurso,String rectipo_codigo, String fac_codigo, String ubi_codigo) {
 		RecursoResponseRest response =  new RecursoResponseRest();
 		List<Recurso> list = new  ArrayList<>();
 		try {
-			Optional<Recurso> recursoSearch = recursoDao.findById(id);
+			Optional<Recurso> recursoSearch = recursoDao.findById(idRecurso);
+			Optional<Tiporecurso> tiporecurso = tipoRecursoDao.findById(rectipo_codigo);
+			Optional<Facultad> facultad = facultadDao.findById(fac_codigo);
+			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
+			if(tiporecurso.isPresent() && facultad.isPresent() && ubicacion.isPresent()) {
+				recurso.setTiporecurso(tiporecurso.get());
+				recurso.setFacultad(facultad.get());;
+				recurso.setUbicacion(ubicacion.get());
+			}else {
+				response.setMetadata("respuesta ok", "-1" ,"Tipo recurso, Facultad, Ubicacion no se encuentra");
+				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.NOT_FOUND);
+			}
 			if(recursoSearch.isPresent()) {
 				recursoSearch.get().setRec_codigo(recurso.getRec_codigo());
+				recursoSearch.get().setRec_capmax(recurso.getRec_capmax());
+				recursoSearch.get().setRec_nombre(recurso.getRec_nombre());
 				recursoSearch.get().setRec_descripcion(recurso.getRec_descripcion());
+				recursoSearch.get().setFacultad(facultad.get());
+				recursoSearch.get().setTiporecurso(tiporecurso.get());
+				recursoSearch.get().setUbicacion(ubicacion.get());
 
 				
 				Recurso recusoUpdate = recursoDao.save(recursoSearch.get());

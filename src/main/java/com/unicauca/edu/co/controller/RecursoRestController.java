@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,8 +64,22 @@ public class RecursoRestController {
 
 	//actualizamos recurso
 	@PutMapping("/recursos/{id}")
-	public ResponseEntity<RecursoResponseRest> actulizarRecurso(@RequestBody Recurso recurso,@PathVariable Long id){
-		ResponseEntity<RecursoResponseRest> response = recursoService.actualizar(recurso, id);
+	public ResponseEntity<RecursoResponseRest> actulizarRecurso(
+			@RequestParam("rec_codigo") String rec_codigo,
+			@RequestParam("rectipo_codigo")String rectipo_codigo,
+			@RequestParam("fac_codigo") String fac_codigo,
+			@RequestParam("rec_capmax") int capmax,
+			@RequestParam("rec_nombre") String rec_nombre,
+			@RequestParam("rec_decripcion")String rec_descripcion,
+			@RequestParam("ubi_codigo") String ubi_codigo,
+			@PathVariable Long id)
+	{
+		Recurso recurso = new Recurso();
+		recurso.setRec_codigo(rec_codigo);
+		recurso.setRec_capmax(capmax);
+		recurso.setRec_nombre(rec_nombre);
+		recurso.setRec_descripcion(rec_descripcion);
+		ResponseEntity<RecursoResponseRest> response = recursoService.actualizar(recurso,id,rectipo_codigo,fac_codigo,ubi_codigo);
 		return response;
 	}
 	
