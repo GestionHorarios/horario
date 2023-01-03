@@ -40,6 +40,13 @@ public class RecursoRestController {
 		return response;
 	}
 	
+	//buscar recurso por rec_codigo
+	@GetMapping("/recursoscod/{cod_recurso}")
+	public ResponseEntity<RecursoResponseRest> buscarRecursoRec_codigo(@PathVariable String cod_recurso){
+		ResponseEntity<RecursoResponseRest> response = recursoService.buscarByRec_codigo(cod_recurso);
+		return response;
+	}
+	
 	//guardamos un recurso
 	@PostMapping("/recursos")
 	public ResponseEntity<RecursoResponseRest> guardarRecurso(
