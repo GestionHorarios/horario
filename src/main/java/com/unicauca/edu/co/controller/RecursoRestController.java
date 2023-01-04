@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,18 +54,15 @@ public class RecursoRestController {
 			@RequestParam("rec_codigo") String rec_codigo,
 			@RequestParam("rectipo_codigo")String rectipo_codigo,
 			@RequestParam("fac_codigo") String fac_codigo,
-			@RequestParam(defaultValue ="-1" ,value="rec_capmax") int capmax,
+			@Nullable @RequestParam(value="rec_capmax") Integer capmax,
 			@RequestParam("rec_nombre") String rec_nombre,
 			@RequestParam("rec_decripcion")String rec_descripcion,
 			@RequestParam("ubi_codigo") String ubi_codigo
 			) throws IOException
 	{
-		System.out.println("recibiendo los datos");
 		Recurso recurso = new Recurso();
 		recurso.setRec_codigo(rec_codigo);
-		if(capmax != -1 ) {
-			recurso.setRec_capmax(capmax);
-		}
+		recurso.setRec_capmax(capmax);
 		recurso.setRec_nombre(rec_nombre);
 		recurso.setRec_descripcion(rec_descripcion);
 		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo,ubi_codigo);
