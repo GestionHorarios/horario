@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.response.RecursoResponseRest;
@@ -58,7 +57,7 @@ public class RecursoRestController {
 			@RequestParam("rec_nombre") String rec_nombre,
 			@RequestParam("rec_decripcion")String rec_descripcion,
 			@RequestParam("ubi_codigo") String ubi_codigo
-			) throws IOException, NumberFormatException, MethodArgumentTypeMismatchException
+			) throws IOException
 	{
 		System.out.println("recibiendo los datos");
 		Recurso recurso = new Recurso();
