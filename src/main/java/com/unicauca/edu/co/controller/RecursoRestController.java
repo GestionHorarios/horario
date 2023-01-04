@@ -75,7 +75,7 @@ public class RecursoRestController {
 			@RequestParam("rec_codigo") String rec_codigo,
 			@RequestParam("rectipo_codigo")String rectipo_codigo,
 			@RequestParam("fac_codigo") String fac_codigo,
-			@Nullable @RequestParam("rec_capmax") int capmax,
+			@Nullable @RequestParam(value="rec_capmax") Integer capmax,
 			@RequestParam("rec_nombre") String rec_nombre,
 			@RequestParam("rec_decripcion")String rec_descripcion,
 			@RequestParam("ubi_codigo") String ubi_codigo,
