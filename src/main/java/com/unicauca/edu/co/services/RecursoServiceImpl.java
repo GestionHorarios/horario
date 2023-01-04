@@ -75,24 +75,25 @@ public class RecursoServiceImpl implements IRecursoService{
 	}
 	
 	//buscar recursos con cod_recurso
-		@Override
-		public ResponseEntity<RecursoResponseRest> buscarByRec_codigo(String rec_codigo) {
-			RecursoResponseRest response = new RecursoResponseRest();
-			try {
-				List<Recurso> recurso = recursoDao.findByRec_codigo(rec_codigo);
-				if(!recurso.isEmpty()) {
-					response.getRecursoResponse().setRecurso(recurso);
-					response.setMetadata("Respuesta ok", "00", "Recurso Encontrado");
-				}else {
-					response.setMetadata("Respuesta nok", "-1", "Recurso no encontrado");
-					return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.NOT_FOUND);
-				}
-			} catch (Exception e) {
-				response.setMetadata("Respuesta nok", "-1", "Error al consultar");
-				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+	@Override
+	@Transactional (readOnly = true)
+	public ResponseEntity<RecursoResponseRest> buscarByRec_codigo(String rec_codigo) {
+		RecursoResponseRest response = new RecursoResponseRest();
+		try {
+			List<Recurso> recurso = recursoDao.findByRec_codigo(rec_codigo);
+			if(!recurso.isEmpty()) {
+				response.getRecursoResponse().setRecurso(recurso);
+				response.setMetadata("Respuesta ok", "00", "Recurso Encontrado");
+			}else {
+				response.setMetadata("Respuesta nok", "-1", "Recurso no encontrado");
+				return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.OK);
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "Error al consultar");
+			return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.OK);
+	}
 
 
 	@Override

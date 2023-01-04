@@ -9,6 +9,6 @@ import com.unicauca.edu.co.model.Recurso;
 
 public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 
-	@Query("SELECT r from Recurso r where r.rec_codigo = ?1")
+	@Query("SELECT r from Recurso r where r.rec_codigo LIKE %?1%")
 	List<Recurso> findByRec_codigo(String rec_codigo);
 }
