@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.response.RecursoResponseRest;
@@ -53,16 +54,18 @@ public class RecursoRestController {
 			@RequestParam("rec_codigo") String rec_codigo,
 			@RequestParam("rectipo_codigo")String rectipo_codigo,
 			@RequestParam("fac_codigo") String fac_codigo,
-			@RequestParam("rec_capmax") int capmax,
+			@RequestParam(defaultValue ="-1" ,value="rec_capmax") int capmax,
 			@RequestParam("rec_nombre") String rec_nombre,
 			@RequestParam("rec_decripcion")String rec_descripcion,
 			@RequestParam("ubi_codigo") String ubi_codigo
-			) throws IOException
+			) throws IOException, NumberFormatException, MethodArgumentTypeMismatchException
 	{
 		System.out.println("recibiendo los datos");
 		Recurso recurso = new Recurso();
 		recurso.setRec_codigo(rec_codigo);
-		recurso.setRec_capmax(capmax);
+		if(capmax != -1 ) {
+			recurso.setRec_capmax(capmax);
+		}
 		recurso.setRec_nombre(rec_nombre);
 		recurso.setRec_descripcion(rec_descripcion);
 		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo,ubi_codigo);
