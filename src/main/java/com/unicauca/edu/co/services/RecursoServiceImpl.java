@@ -35,6 +35,7 @@ public class RecursoServiceImpl implements IRecursoService{
 	@Autowired
 	private IUbicacionDao ubicacionDao;
 
+	//listar todos los recursos
 	@Override
 	@Transactional (readOnly = true)
 	public ResponseEntity<RecursoResponseRest> listar() {
@@ -51,6 +52,7 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest> (response, HttpStatus.OK);
 	}
 
+	//buscar por id 
 	@Override
 	public ResponseEntity<RecursoResponseRest> buscarById(Long id) {
 		RecursoResponseRest response = new RecursoResponseRest();
@@ -95,7 +97,7 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.OK);
 	}
 
-
+	//guardar recurso
 	@Override
 	public ResponseEntity<RecursoResponseRest> guardar(Recurso recurso, String rectipo_codigo, String fac_codigo, String ubi_codigo) {
 		RecursoResponseRest response = new RecursoResponseRest();
@@ -190,6 +192,26 @@ public class RecursoServiceImpl implements IRecursoService{
 			response.setMetadata("Respuesta nok", "-1", "Error al eliminar");
 			e.getStackTrace();
 			return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
+	}
+
+	//Asignar recursos a un recurso
+	@Override
+	public ResponseEntity<RecursoResponseRest> asignarRecursoaRecurso(Long rec_codigo, Long rec_codigo2) {
+		RecursoResponseRest response = new RecursoResponseRest();
+		try {
+			Optional<Recurso> recursoPadre = recursoDao.findById(rec_codigo);
+			Optional<Recurso> recursoHijo = recursoDao.findById(rec_codigo2);
+			recursoPadre.get().agregarRecursos(recursoHijo.get());
+			List<Recurso> list = new ArrayList<Recurso>();
+			recursoDao.save(recursoPadre.get());
+			list.add(recursoPadre.get());
+			response.getRecursoResponse().setRecurso(list);
+			response.setMetadata("Respuesta ok", "00", "Recurso asignado");
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "Error al asignar recursos");
+			return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
 	}

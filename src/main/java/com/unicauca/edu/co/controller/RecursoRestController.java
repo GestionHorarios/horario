@@ -27,6 +27,17 @@ public class RecursoRestController {
 	@Autowired
 	private IRecursoService recursoService;
 	
+	//Asignar un recurso a otro recurso
+	@PostMapping("/recursos/asignar")
+	private ResponseEntity<RecursoResponseRest> agregarRecursoaRecurso(
+			@RequestParam("rec_codigo") Long rec_codigo,
+			@RequestParam("rec_codigo2") Long rec_codigo2
+			)
+	{
+		ResponseEntity<RecursoResponseRest> response = recursoService.asignarRecursoaRecurso(rec_codigo, rec_codigo2);
+		return response;
+	}
+	
 	//obtenemos todos los recursos
 	@GetMapping("/recursos")
 	private ResponseEntity<RecursoResponseRest> listarRecursos(){

@@ -1,6 +1,7 @@
 package com.unicauca.edu.co.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -54,13 +55,17 @@ public class Recurso implements Serializable{
 	)
 	//targetEntity = Recurso.class,
 	@ManyToMany(cascade = CascadeType.ALL)
-	List<Recurso> recursoUno;
+	List<Recurso> recursoHijo;
 	
 	//,
 	//fetch= FetchType.LAZY
-	@ManyToMany(mappedBy= "recursoUno")
-	List<Recurso> recursoDos;
-	
+	//@ManyToMany(mappedBy= "recursoUno")
+	//List<Recurso> recursoDos;
+
+	public Recurso() {
+		this.recursoHijo = new ArrayList<Recurso>();
+		//this.recursoDos = new ArrayList<Recurso>();
+	}
 
 	public Long getRec_id() {
 		return rec_id;
@@ -73,73 +78,53 @@ public class Recurso implements Serializable{
 	public String getRec_codigo() {
 		return rec_codigo;
 	}
-
 	public void setRec_codigo(String rec_codigo) {
 		this.rec_codigo = rec_codigo;
 	}
-
 	public Tiporecurso getTiporecurso() {
 		return tiporecurso;
 	}
-
 	public void setTiporecurso(Tiporecurso tiporecurso) {
 		this.tiporecurso = tiporecurso;
 	}
-
 	public Facultad getFacultad() {
 		return facultad;
 	}
-
 	public void setFacultad(Facultad facultad) {
 		this.facultad = facultad;
 	}
-
 	public Integer getRec_capmax() {
 		return rec_capmax;
 	}
-
 	public void setRec_capmax(Integer rec_capmax) {
 		this.rec_capmax = rec_capmax;
 	}
-
 	public String getRec_nombre() {
 		return rec_nombre;
 	}
-
 	public void setRec_nombre(String rec_nombre) {
 		this.rec_nombre = rec_nombre;
 	}
-
 	public String getRec_descripcion() {
 		return rec_descripcion;
 	}
-
 	public void setRec_descripcion(String rec_descripcion) {
 		this.rec_descripcion = rec_descripcion;
 	}
-
 	public Ubicacion getUbicacion() {
 		return ubicacion;
 	}
-
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-
-	public List<Recurso> getRecursoUno() {
-		return recursoUno;
+	public List<Recurso> getRecursoHijo() {
+		return recursoHijo;
 	}
-
-	public void setRecursoUno(List<Recurso> recursoUno) {
-		this.recursoUno = recursoUno;
+	public void setRecursoHijo(List<Recurso> recursoHijo) {
+		this.recursoHijo = recursoHijo;
 	}
-
-	public List<Recurso> getRecursoDos() {
-		return recursoDos;
-	}
-
-	public void setRecursoDos(List<Recurso> recursoDos) {
-		this.recursoDos = recursoDos;
+	public void agregarRecursos(Recurso recursoHijo) {
+		this.recursoHijo.add(recursoHijo);
 	}
 
 }

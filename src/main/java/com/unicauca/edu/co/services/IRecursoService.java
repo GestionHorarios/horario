@@ -14,4 +14,6 @@ public interface IRecursoService {
 	public ResponseEntity<RecursoResponseRest> actualizar(Recurso recurso, Long idRecurso,String rectipo_codigo, String fac_codigo, String ubi_codigo);
 	public ResponseEntity<RecursoResponseRest> eliminarById(Long id);
 	
+	public ResponseEntity<RecursoResponseRest> asignarRecursoaRecurso(Long rec_codigo, Long rec_codigo2);
+	
 }
