@@ -11,4 +11,12 @@ public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 
 	@Query("SELECT r from Recurso r where r.rec_codigo LIKE %?1%")
 	List<Recurso> findByRec_codigo(String rec_codigo);
+	
+	@Query("SELECT r from Recurso r where r.tiporecurso.rectipo_codigo = 'Salon' OR r.tiporecurso.rectipo_codigo = 'Sala' OR r.tiporecurso.rectipo_codigo = 'Auditorio' And r.facultad.fac_codigo = ?1")
+	List<Recurso> recursosPorFacultadAudiSalaSalon (String fac_codigo);
 }
+/*
+ * SELECT 
+FROM recurso
+WHERE tiporecurso_rectipo_codigo = 'Salon' OR tiporecurso_rectipo_codigo ='Sala' OR tiporecurso_rectipo_codigo ='Auditorio'
+ */

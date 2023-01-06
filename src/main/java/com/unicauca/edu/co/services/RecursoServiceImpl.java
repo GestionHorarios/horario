@@ -182,6 +182,7 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest> (response, HttpStatus.OK);
 	}
 
+	//eliminar dela bd un recurso
 	@Override
 	public ResponseEntity<RecursoResponseRest> eliminarById(Long id) {
 		RecursoResponseRest response = new RecursoResponseRest();
@@ -212,6 +213,21 @@ public class RecursoServiceImpl implements IRecursoService{
 		} catch (Exception e) {
 			response.setMetadata("Respuesta nok", "-1", "Error al asignar recursos");
 			return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
+	}
+
+	//Recursos Auditorio Sala Salon por facultad 
+	@Override
+	public ResponseEntity<RecursoResponseRest> recursosPorFacultadAudiSalaSalon (String fac_codigo) {
+		RecursoResponseRest response = new RecursoResponseRest();
+		try {
+			List<Recurso> list = recursoDao.recursosPorFacultadAudiSalaSalon(fac_codigo);
+			response.getRecursoResponse().setRecurso(list);
+			response.setMetadata("Respuesta ok", "00", "Recursos encontrados");
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "Error al buscar recursos Auditorio Sala Salon");
+			return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
 	}

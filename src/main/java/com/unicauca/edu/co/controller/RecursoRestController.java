@@ -108,4 +108,10 @@ public class RecursoRestController {
 		return resposne;
 	}
 	
+	//Recursos Auditorio Salon Sala por fac_codigo
+	@GetMapping("/recursos/facaudisalasalon/{fac_codigo}")
+	public ResponseEntity<RecursoResponseRest> recursosPorFacAudiSalaSalon(@PathVariable String fac_codigo){
+		ResponseEntity<RecursoResponseRest> response = recursoService.recursosPorFacultadAudiSalaSalon(fac_codigo);
+		return response;
+	}
 }
