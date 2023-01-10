@@ -232,4 +232,19 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
 	}
 
+	//Recursos diferentes a Auditorio sala salon por facultad
+	@Override
+	public ResponseEntity<RecursoResponseRest> recursosPorFacultadDiferenteAudiSalaSalon(String fac_codigo) {
+		RecursoResponseRest response = new RecursoResponseRest();
+		try {
+			List<Recurso> list = recursoDao.recursosPorFacultadDiferenteAudiSalaSalon(fac_codigo);
+			response.getRecursoResponse().setRecurso(list);
+			response.setMetadata("Respuesta ok", "00", "Recursos encontrados");
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "Error al buscar recursos diferentes Auditorio sala salon");
+			return new ResponseEntity<RecursoResponseRest>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
+	}
+
 }
