@@ -28,6 +28,9 @@ public class Recurso implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rec_id;
 	private String rec_codigo;
+	private Integer rec_capmax;
+	private String rec_nombre;
+	private String rec_descripcion;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
@@ -36,10 +39,6 @@ public class Recurso implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Facultad facultad;
-	
-	private Integer rec_capmax;
-	private String rec_nombre;
-	private String rec_descripcion;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
@@ -67,6 +66,11 @@ public class Recurso implements Serializable{
 		//this.recursoDos = new ArrayList<Recurso>();
 	}
 
+	public void agregarRecursos(Recurso recursoHijo) {
+		this.recursoHijo.add(recursoHijo);
+	}
+
+	//getter and setters
 	public Long getRec_id() {
 		return rec_id;
 	}
@@ -78,53 +82,65 @@ public class Recurso implements Serializable{
 	public String getRec_codigo() {
 		return rec_codigo;
 	}
+
 	public void setRec_codigo(String rec_codigo) {
 		this.rec_codigo = rec_codigo;
 	}
-	public Tiporecurso getTiporecurso() {
-		return tiporecurso;
-	}
-	public void setTiporecurso(Tiporecurso tiporecurso) {
-		this.tiporecurso = tiporecurso;
-	}
-	public Facultad getFacultad() {
-		return facultad;
-	}
-	public void setFacultad(Facultad facultad) {
-		this.facultad = facultad;
-	}
+
 	public Integer getRec_capmax() {
 		return rec_capmax;
 	}
+
 	public void setRec_capmax(Integer rec_capmax) {
 		this.rec_capmax = rec_capmax;
 	}
+
 	public String getRec_nombre() {
 		return rec_nombre;
 	}
+
 	public void setRec_nombre(String rec_nombre) {
 		this.rec_nombre = rec_nombre;
 	}
+
 	public String getRec_descripcion() {
 		return rec_descripcion;
 	}
+
 	public void setRec_descripcion(String rec_descripcion) {
 		this.rec_descripcion = rec_descripcion;
 	}
+
+	public Tiporecurso getTiporecurso() {
+		return tiporecurso;
+	}
+
+	public void setTiporecurso(Tiporecurso tiporecurso) {
+		this.tiporecurso = tiporecurso;
+	}
+
+	public Facultad getFacultad() {
+		return facultad;
+	}
+
+	public void setFacultad(Facultad facultad) {
+		this.facultad = facultad;
+	}
+
 	public Ubicacion getUbicacion() {
 		return ubicacion;
 	}
+
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+
 	public List<Recurso> getRecursoHijo() {
 		return recursoHijo;
 	}
+
 	public void setRecursoHijo(List<Recurso> recursoHijo) {
 		this.recursoHijo = recursoHijo;
-	}
-	public void agregarRecursos(Recurso recursoHijo) {
-		this.recursoHijo.add(recursoHijo);
 	}
 
 }
