@@ -76,6 +76,7 @@ public class RecursoRestController {
 		recurso.setRec_capmax(capmax);
 		recurso.setRec_nombre(rec_nombre);
 		recurso.setRec_descripcion(rec_descripcion);
+		recurso.setEstado(false);
 		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo,ubi_codigo);
 		return response;
 	}

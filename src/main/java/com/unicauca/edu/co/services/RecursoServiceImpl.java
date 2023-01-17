@@ -204,6 +204,7 @@ public class RecursoServiceImpl implements IRecursoService{
 		try {
 			Optional<Recurso> recursoPadre = recursoDao.findById(rec_codigo);
 			Optional<Recurso> recursoHijo = recursoDao.findById(rec_codigo2);
+			recursoHijo.get().setEstado(true);
 			recursoPadre.get().agregarRecursos(recursoHijo.get());
 			List<Recurso> list = new ArrayList<Recurso>();
 			recursoDao.save(recursoPadre.get());

@@ -31,6 +31,7 @@ public class Recurso implements Serializable{
 	private Integer rec_capmax;
 	private String rec_nombre;
 	private String rec_descripcion;
+	private boolean estado;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
@@ -141,6 +142,14 @@ public class Recurso implements Serializable{
 
 	public void setRecursoHijo(List<Recurso> recursoHijo) {
 		this.recursoHijo = recursoHijo;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 }
