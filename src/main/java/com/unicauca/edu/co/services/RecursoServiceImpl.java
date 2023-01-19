@@ -239,12 +239,6 @@ public class RecursoServiceImpl implements IRecursoService{
 		RecursoResponseRest response = new RecursoResponseRest();
 		try {
 			List<Recurso> list = recursoDao.recursosPorFacultadDiferenteAudiSalaSalon(fac_codigo);
-			for (Recurso recurso : list) {
-				System.out.println("*********************************************");
-				System.out.println("id: "+recurso.getRec_id());
-				System.out.println("codigo: "+recurso.getRec_codigo());
-				System.out.println("estado "+recurso.isEstado());
-			}
 			response.getRecursoResponse().setRecurso(list);
 			response.setMetadata("Respuesta ok", "00", "Recursos encontrados");
 		} catch (Exception e) {
