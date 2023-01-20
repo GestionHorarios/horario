@@ -233,7 +233,7 @@ public class RecursoServiceImpl implements IRecursoService{
 		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
 	}
 
-	//Recursos diferentes a Auditorio sala salon por facultad
+	//Recursos diferentes a Auditorio sala salon por facultad que estes disponibles 
 	@Override
 	public ResponseEntity<RecursoResponseRest> recursosPorFacultadDiferenteAudiSalaSalon(String fac_codigo) {
 		RecursoResponseRest response = new RecursoResponseRest();
