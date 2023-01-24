@@ -27,6 +27,17 @@ public class RecursoRestController {
 	@Autowired
 	private IRecursoService recursoService;
 	
+	//desasignar un recurso a otro recurso
+	@PostMapping("/recursos/desasignar")
+	private ResponseEntity<RecursoResponseRest> retirarRecursoaRecurso(
+			@RequestParam("rec_codigo") Long rec_codigo,
+			@RequestParam("rec_codigo2") Long rec_codigo2
+			)
+	{
+		ResponseEntity<RecursoResponseRest> response = recursoService.desasignarRecursoaRecurso(rec_codigo, rec_codigo2);
+		return response;
+	}
+	
 	//Asignar un recurso a otro recurso
 	@PostMapping("/recursos/asignar")
 	private ResponseEntity<RecursoResponseRest> agregarRecursoaRecurso(

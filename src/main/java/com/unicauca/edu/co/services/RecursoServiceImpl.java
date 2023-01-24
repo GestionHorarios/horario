@@ -217,7 +217,25 @@ public class RecursoServiceImpl implements IRecursoService{
 		}
 		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
 	}
-
+	
+	//Desasignar recursos a un recurso
+	@Override
+	public ResponseEntity<RecursoResponseRest> desasignarRecursoaRecurso(Long rec_codigo, Long rec_codigo2) {
+		RecursoResponseRest response = new RecursoResponseRest();
+		try {
+			Optional<Recurso> recursoPadre = recursoDao.findById(rec_codigo);
+			Optional<Recurso> recursoHijo = recursoDao.findById(rec_codigo2);
+			recursoHijo.get().setEstado(false);
+			recursoPadre.get().getRecursoHijo().remove(recursoHijo.get());
+			recursoDao.save(recursoPadre.get());
+			response.setMetadata("Respuesta ok ", "00", "Se desasigno el recurso");
+		} catch (Exception e) {
+			response.setMetadata("Respuesta nok", "-1", "ocurrio un erro al querer desasignar");
+			return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.OK);
+	}
+	
 	//Recursos Auditorio Sala Salon por facultad 
 	@Override
 	public ResponseEntity<RecursoResponseRest> recursosPorFacultadAudiSalaSalon (String fac_codigo) {
