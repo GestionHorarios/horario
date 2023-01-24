@@ -15,6 +15,7 @@ public interface IRecursoService {
 	public ResponseEntity<RecursoResponseRest> eliminarById(Long id);
 	
 	public ResponseEntity<RecursoResponseRest> asignarRecursoaRecurso(Long rec_codigo, Long rec_codigo2);
+	public ResponseEntity<RecursoResponseRest> desasignarRecursoaRecurso(Long rec_codigo, Long rec_codigo2);
 	public ResponseEntity<RecursoResponseRest> recursosPorFacultadAudiSalaSalon(String fac_codigo);
 	public ResponseEntity<RecursoResponseRest> recursosPorFacultadDiferenteAudiSalaSalon(String fac_codigo);
 	
