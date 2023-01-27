@@ -26,10 +26,34 @@ public class Curso implements Serializable {
 	private Integer cur_capmax;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
-	Recurso recurso;
-	@ManyToOne(fetch = FetchType.LAZY)
 	private Asignatura asignatura;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	private Periodo periodo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	private Docente docente;
+
+	//getter and setter
+	public Asignatura getAsignatura() {
+		return asignatura;
+	}
+	public void setAsignatura(Asignatura asignatura) {
+		this.asignatura = asignatura;
+	}
+	public Docente getDocente() {
+		return docente;
+	}
+	public void setDocente(Docente docente) {
+		this.docente = docente;
+	}
+
+	public Periodo getPeriodo() {
+		return periodo;
+	}
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
+	}
 	public Long getCur_id() {
 		return cur_id;
 	}
@@ -53,11 +77,5 @@ public class Curso implements Serializable {
 	}
 	public void setCur_capmax(Integer cur_capmax) {
 		this.cur_capmax = cur_capmax;
-	}
-	public Recurso getRecurso() {
-		return recurso;
-	}
-	public void setRecurso(Recurso recurso) {
-		this.recurso = recurso;
 	}
 }
