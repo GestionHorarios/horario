@@ -55,7 +55,7 @@ public class DocumentoService {
 				}
 			}
 //fin espacio para trabajar file 
-			response.setMetadata("Respuesta ok", "00", "Si hay archivo");
+			response.setMetadata("Respuesta ok", "00", "Se cargo el archivo");
 		}
 		else {
 			response.setMetadata("Respuesta nok", "-1", "No se envio archivo");
