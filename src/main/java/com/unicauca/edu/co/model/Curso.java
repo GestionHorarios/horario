@@ -21,7 +21,6 @@ public class Curso implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cur_id;
-	private String cur_codigo;
 	private String cur_nombre;
 	private Integer cur_capmax;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -34,6 +33,15 @@ public class Curso implements Serializable {
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Docente docente;
 
+//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso")
+//	private List<Horario> horarios;
+//	
+//	public List<Horario> getHorarios() {
+//		return horarios;
+//	}
+//	public void setHorarios(List<Horario> horarios) {
+//		this.horarios = horarios;
+//	}
 	//getter and setter
 	public Asignatura getAsignatura() {
 		return asignatura;
@@ -59,12 +67,6 @@ public class Curso implements Serializable {
 	}
 	public void setCur_id(Long cur_id) {
 		this.cur_id = cur_id;
-	}
-	public String getCur_codigo() {
-		return cur_codigo;
-	}
-	public void setCur_codigo(String cur_codigo) {
-		this.cur_codigo = cur_codigo;
 	}
 	public String getCur_nombre() {
 		return cur_nombre;

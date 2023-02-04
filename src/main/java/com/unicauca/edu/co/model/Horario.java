@@ -1,10 +1,11 @@
 package com.unicauca.edu.co.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,18 +19,24 @@ public class Horario implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long hor_id;
 	private String hor_dia;
-	private Date hor_hora_fin;
-	private Date hor_hora_inicio;
+//	@Temporal(TemporalType.TIME)
+	private String hor_hora_inicio;
+//	@Temporal(TemporalType.TIME)
+	private String hor_hora_fin;
+	
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Recurso recurso;
+	
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Curso curso;
 
-	
 	//getters and setters
 	public Long getHor_id() {
 		return hor_id;
@@ -43,17 +50,17 @@ public class Horario implements Serializable{
 	public void setHor_dia(String hor_dia) {
 		this.hor_dia = hor_dia;
 	}
-	public Date getHor_hora_fin() {
-		return hor_hora_fin;
-	}
-	public void setHor_hora_fin(Date hor_hora_fin) {
-		this.hor_hora_fin = hor_hora_fin;
-	}
-	public Date getHor_hora_inicio() {
+	public String getHor_hora_inicio() {
 		return hor_hora_inicio;
 	}
-	public void setHor_hora_inicio(Date hor_hora_inicio) {
+	public void setHor_hora_inicio(String hor_hora_inicio) {
 		this.hor_hora_inicio = hor_hora_inicio;
+	}
+	public String getHor_hora_fin() {
+		return hor_hora_fin;
+	}
+	public void setHor_hora_fin(String hor_hora_fin) {
+		this.hor_hora_fin = hor_hora_fin;
 	}
 	public Recurso getRecurso() {
 		return recurso;
