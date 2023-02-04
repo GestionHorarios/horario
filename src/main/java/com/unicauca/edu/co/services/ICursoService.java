@@ -13,4 +13,6 @@ public interface ICursoService {
     public ResponseEntity<CursoResponseRest> guardar(Curso curso, String curtip_codigo, String fac_codigo, String ubi_codigo);
 
     public ResponseEntity<CursoResponseRest> eliminarById(Long id);
+    
+    public ResponseEntity<CursoResponseRest> cursosPorFacultad(String fac_codigo);
 }
