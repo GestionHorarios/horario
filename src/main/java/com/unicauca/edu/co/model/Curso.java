@@ -32,8 +32,16 @@ public class Curso implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Docente docente;
-
-//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso")
+	private Boolean cur_estado;
+	
+	
+	public Boolean getCur_estado() {
+		return cur_estado;
+	}
+	public void setCur_estado(Boolean cur_estado) {
+		this.cur_estado = cur_estado;
+	}
+	//	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso")
 //	private List<Horario> horarios;
 //	
 //	public List<Horario> getHorarios() {

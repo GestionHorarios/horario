@@ -69,11 +69,12 @@ public class HorarioRestController {
 		return response;
 	}
 	
+	//METODO QUE LISTA LOS HORARIOS QUE TIENE UN RECURSO
 	@GetMapping("/horario/listaHorDeRecurso/{recurso_id}")
 	public ResponseEntity<HorarioResponseRest> listarHorariosDeRecurso(
 			@PathVariable("recurso_id") Long recurso_id){
 		ResponseEntity<HorarioResponseRest> response = horarioService.listarHorariosDeRecurso(recurso_id);
 		return response;
 	}
-
+	
 }

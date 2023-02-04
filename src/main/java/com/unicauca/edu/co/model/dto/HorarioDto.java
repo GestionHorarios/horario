@@ -12,6 +12,10 @@ public class HorarioDto implements Serializable{
 	private String hor_hora_fin;
 	private Long recurso_id;
 	private Long cusro_id;
+	private String asig_nombre;
+	private String cur_nombre;
+	
+	public HorarioDto() {}
 	
 	public HorarioDto(Long hor_id, String hor_dia, String hor_hora_inicio, String hor_hora_fin, Long recurso_id,
 			Long cusro_id) {
@@ -21,6 +25,18 @@ public class HorarioDto implements Serializable{
 		this.hor_hora_fin = hor_hora_fin;
 		this.recurso_id = recurso_id;
 		this.cusro_id = cusro_id;
+		
+	}
+	public HorarioDto(Long hor_id, String hor_dia, String hor_hora_inicio, String hor_hora_fin, Long recurso_id,
+			Long cusro_id, String asig_nombre, String cur_nombre) {
+		this.hor_id = hor_id;
+		this.hor_dia = hor_dia;
+		this.hor_hora_inicio = hor_hora_inicio;
+		this.hor_hora_fin = hor_hora_fin;
+		this.recurso_id = recurso_id;
+		this.cusro_id = cusro_id;
+		this.asig_nombre = asig_nombre;
+		this.cur_nombre = cur_nombre;
 	}
 	public Long getHor_id() {
 		return hor_id;
@@ -57,5 +73,23 @@ public class HorarioDto implements Serializable{
 	}
 	public void setCusro_id(Long cusro_id) {
 		this.cusro_id = cusro_id;
+	}
+	public String getAsig_nombre() {
+		return asig_nombre;
+	}
+	public void setAsig_nombre(String asig_nombre) {
+		this.asig_nombre = asig_nombre;
+	}
+	public String getCur_nombre() {
+		return cur_nombre;
+	}
+	public void setCur_nombre(String cur_nombre) {
+		this.cur_nombre = cur_nombre;
+	}
+	@Override
+	public String toString() {
+		return "HorarioDto [hor_id=" + hor_id + ", hor_dia=" + hor_dia + ", hor_hora_inicio=" + hor_hora_inicio
+				+ ", hor_hora_fin=" + hor_hora_fin + ", recurso_id=" + recurso_id + ", cusro_id=" + cusro_id
+				+ ", asig_nombre=" + asig_nombre + ", cur_nombre=" + cur_nombre + "]";
 	}
 }
