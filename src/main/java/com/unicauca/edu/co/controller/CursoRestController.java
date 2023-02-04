@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.unicauca.edu.co.response.CursoResponseRest;
-
+import com.unicauca.edu.co.response.RecursoResponseRest;
 import com.unicauca.edu.co.services.ICursoService;
 
 
@@ -39,4 +39,11 @@ public class CursoRestController {
         ResponseEntity<CursoResponseRest> response = cursoService.eliminarById(id);
         return response;
     }
+    
+  //Curso por Facultad
+  	@GetMapping("/cursos/facultad/{fac_codigo}")
+  	public ResponseEntity<CursoResponseRest> cursosPorFacultad(@PathVariable String fac_codigo){
+  		ResponseEntity<CursoResponseRest> response = cursoService.cursosPorFacultad(fac_codigo);
+  		return response;
+  	}
 }
