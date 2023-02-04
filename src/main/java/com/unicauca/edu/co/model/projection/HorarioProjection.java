@@ -7,5 +7,6 @@ public interface HorarioProjection {
 	public String getHor_hora_fin();
 	public Long getRec_id();
 	public Long getCur_id();
-	
+	public String getCur_nombre();
+	public String getAsig_nombre();	
 }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Horario</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+	<img th:src="@{/images/logo.png}" width="136" height="136" >
+	<h1 class="text-primary" th:text="'Recurso: '+${recurso.rec_descripcion}+' '+${recurso.rec_nombre}"></h1>
+
+	<table class="table table-striped table-bordered table-hover">
+	 	<thead>
+	 		<tr>
+	 			<th>HORARIO</th>
+	 		</tr>
+	 		<tr>
+			  	<tr id="Cabecera_2">
+                <th>HORA</th>
+                <th>LUNES</th>
+                <th>MARTES</th>
+                <th>MIERCOLES</th>
+                <th>JUEVES</th>
+                <th>VIERNES</th>
+                <th>SABADO</th>
+            </tr>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>7:00 AM <br> 8:00 AM</td>
+				<td th:text="${lunes[0].asig_nombre}+' '+${lunes[0].cur_nombre}"></td>
+				<td th:text="${martes[0].asig_nombre}+' '+${martes[0].cur_nombre}"></td>
+				<td th:text="${miercoles[0].asig_nombre}+' '+${miercoles[0].cur_nombre}"></td>
+				<td th:text="${jueves[0].asig_nombre}+' '+${jueves[0].cur_nombre}"></td>
+				<td th:text="${viernes[0].asig_nombre}+' '+${viernes[0].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>9:00 AM <br> 11:00 AM</td>
+				<td th:text="${lunes[1].asig_nombre}+' '+${lunes[1].cur_nombre}"></td>
+				<td th:text="${martes[1].asig_nombre}+' '+${martes[1].cur_nombre}"></td>
+				<td th:text="${miercoles[1].asig_nombre}+' '+${miercoles[1].cur_nombre}"></td>
+				<td th:text="${jueves[1].asig_nombre}+' '+${jueves[1].cur_nombre}"></td>
+				<td th:text="${viernes[1].asig_nombre}+' '+${viernes[1].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>11:00 AM <br> 01:00 PM</td>
+				<td th:text="${lunes[2].asig_nombre}+' '+${lunes[2].cur_nombre}"></td>
+				<td th:text="${martes[2].asig_nombre}+' '+${martes[2].cur_nombre}"></td>
+				<td th:text="${miercoles[2].asig_nombre}+' '+${miercoles[2].cur_nombre}"></td>
+				<td th:text="${jueves[2].asig_nombre}+' '+${jueves[2].cur_nombre}"></td>
+				<td th:text="${viernes[2].asig_nombre}+' '+${viernes[2].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>02:00 PM <br> 04:00 PM</td>
+				<td th:text="${lunes[3].asig_nombre}+' '+${lunes[3].cur_nombre}"></td>
+				<td th:text="${martes[3].asig_nombre}+' '+${martes[3].cur_nombre}"></td>
+				<td th:text="${miercoles[3].asig_nombre}+' '+${miercoles[3].cur_nombre}"></td>
+				<td th:text="${jueves[3].asig_nombre}+' '+${jueves[3].cur_nombre}"></td>
+				<td th:text="${viernes[3].asig_nombre}+' '+${viernes[3].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>04:00 PM <br> 06:00 PM</td>
+				<td th:text="${lunes[4].asig_nombre}+' '+${lunes[4].cur_nombre}"></td>
+				<td th:text="${martes[4].asig_nombre}+' '+${martes[4].cur_nombre}"></td>
+				<td th:text="${miercoles[4].asig_nombre}+' '+${miercoles[4].cur_nombre}"></td>
+				<td th:text="${jueves[4].asig_nombre}+' '+${jueves[4].cur_nombre}"></td>
+				<td th:text="${viernes[4].asig_nombre}+' '+${viernes[4].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>06:00 PM <br> 08:00 PM</td>
+				<td th:text="${lunes[5].asig_nombre}+' '+${lunes[5].cur_nombre}"></td>
+				<td th:text="${martes[5].asig_nombre}+' '+${martes[5].cur_nombre}"></td>
+				<td th:text="${miercoles[5].asig_nombre}+' '+${miercoles[5].cur_nombre}"></td>
+				<td th:text="${jueves[5].asig_nombre}+' '+${jueves[5].cur_nombre}"></td>
+				<td th:text="${viernes[5].asig_nombre}+' '+${viernes[5].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+            <tr>
+				<td>08:00 PM <br> 10:00 PM</td>
+				<td th:text="${lunes[6].asig_nombre}+' '+${lunes[6].cur_nombre}"></td>
+				<td th:text="${martes[6].asig_nombre}+' '+${martes[6].cur_nombre}"></td>
+				<td th:text="${miercoles[6].asig_nombre}+' '+${miercoles[6].cur_nombre}"></td>
+				<td th:text="${jueves[6].asig_nombre}+' '+${jueves[6].cur_nombre}"></td>
+				<td th:text="${viernes[6].asig_nombre}+' '+${viernes[6].cur_nombre}"></td>
+<!--				<td th:if="${sabado != null}" th:text="${sabado[0].asig_nombre}+' '+${sabado[0].cur_nombre}"></td> -->
+            </tr>
+		</tbody>
+    
+	    <!-- 
+	    <td th:text="${vacante.destacado}"></td>	    
+	    <td th:text="${vacante.destacado == 1 ? 'Si' : 'No'}"></td>
+	    -->
+<!--	    <td>	    
+	    	<span th:if="${vacante.destacado==1}" class="badge badge-success">Si</span>
+	    	<span th:unless="${vacante.destacado==1}" class="badge badge-danger">No</span>	    
+	    </td> 
+	    <td>
+	    	<a th:href="@{/vacantes/view/{id} (id=${vacante.id})  }" class="btn btn-success">Detalle</a>
+	    </td>
+	    <td>
+	    	<a th:href="@{/vacantes/delete(id=${vacante.id})  }" class="btn btn-danger">Borrar</a>
+	    </td>
+-->	    
+	    	  
+	  
+	 
+	</table> 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
