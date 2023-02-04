@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -62,14 +63,29 @@ public class Recurso implements Serializable{
 	//@ManyToMany(mappedBy= "recursoUno")
 	//List<Recurso> recursoDos;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso")
+	private List<Horario> horarios;
+	
 	public Recurso() {
 		this.recursoHijo = new ArrayList<Recurso>();
-		//this.recursoDos = new ArrayList<Recurso>();
+		this.horarios = new ArrayList<Horario>();
 	}
-
+	
 	public void agregarRecursos(Recurso recursoHijo) {
 		this.recursoHijo.add(recursoHijo);
 	}
+	
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
+
+	
+
+	
 
 	//getter and setters
 	public Long getRec_id() {
