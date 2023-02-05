@@ -13,7 +13,7 @@ public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 	@Query("SELECT r from Recurso r where r.rec_codigo LIKE %?1%")
 	List<Recurso> findByRec_codigo(String rec_codigo);
 	
-	@Query("SELECT r from Recurso r where r.tiporecurso.rectipo_codigo = 'Salon' OR r.tiporecurso.rectipo_codigo = 'Sala' OR r.tiporecurso.rectipo_codigo = 'Auditorio' And r.facultad.fac_codigo = ?1")
+	@Query(nativeQuery = true, value= "SELECT r.* FROM recurso AS r WHERE r.facultad_fac_codigo = ?1 AND r.tiporecurso_rectipo_codigo = 'Sala' OR 'Auditorio' OR 'Salon' ")
 	List<Recurso> recursosPorFacultadAudiSalaSalon (String fac_codigo);
 	
 	@Query("SELECT r from Recurso r where r.tiporecurso.rectipo_codigo <> 'Salon' AND r.tiporecurso.rectipo_codigo <> 'Sala' AND r.tiporecurso.rectipo_codigo <> 'Auditorio' And r.facultad.fac_codigo = ?1 AND r.estado = false")
