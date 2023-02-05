@@ -19,6 +19,7 @@ public interface IHorarioDao extends CrudRepository<Horario, Long> {
 	@Query(nativeQuery=true,value="SELECT h.* FROM horario AS h WHERE h.hor_dia = ?1 AND h.recurso_rec_id = ?2 ORDER BY h.hor_hora_inicio ASC")
 	List<Horario> listaHorarioPorDiaDeUnRecurso(String dia, Long recurso_id);
 	
+	//query que trae por dia de semana y en oden de horainicio los horarios de un recurso 
 	@Query(nativeQuery=true,value="SELECT h.hor_id, h.hor_dia, h.hor_hora_fin, h.hor_hora_inicio, h.curso_cur_id AS cur_id, h.recurso_rec_id AS rec_id, c.cur_nombre, a.asig_nombre "
 			+ " FROM horario AS h INNER JOIN curso AS c ON  h.curso_cur_id = c.cur_id INNER JOIN asignatura AS a ON c.asignatura_asig_codigo = a.asig_codigo "
 			+ " WHERE h.hor_dia = ?1 AND h.recurso_rec_id = ?2 ORDER BY h.hor_hora_inicio ASC ")

@@ -33,11 +33,9 @@ public class HorarioController {
 		List<HorarioDto> listaJueves = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("JUEVES",recurso_id));
 		List<HorarioDto> listaViernes = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("VIERNES",recurso_id));
 		List<HorarioDto> listaSabado = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("SABADO",recurso_id));
-
-		for (HorarioDto lunes : listaLunes) {
-			System.out.println(lunes.toString());
-		}
-		
+//		for (HorarioDto lunes : listaLunes) {
+//			System.out.println(lunes.toString());
+//		}
 		modelo.addAttribute("lunes",listaLunes);
 		modelo.addAttribute("martes",listaMartes);
 		modelo.addAttribute("miercoles",listaMiercoles);
@@ -45,6 +43,7 @@ public class HorarioController {
 		modelo.addAttribute("viernes",listaViernes);
 		modelo.addAttribute("sabado",listaSabado);
 		modelo.addAttribute("recurso",recursoDao.findById(recurso_id).get());
+		modelo.addAttribute("color", "rgb(102, 255, 153)");
 		return "horario/listhorario";
 	}
 	
@@ -65,22 +64,31 @@ public class HorarioController {
 	//metodo que recibe un horario de un dia y si no tiene horas asignadas ese día le asigna vacias 
 	private List<HorarioDto> horariosConfirmados(List<HorarioDto> listaHorarios){//tomo la lista de horarios que me trae la bd
 		List<HorarioDto> listEnviar = new ArrayList<>();
-		String[] horas = {"07:00:00","09:00:00","11:00:00","13:00:00","14:00:00","16:00:00","18:00:00","20:00:00"};
-		Boolean tieneesahora = false;
+		String[] horas = {"07:00:00","09:00:00","11:00:00","14:00:00","16:00:00","18:00:00","20:00:00"};
+		boolean esta = false;
 		for (String hora : horas) {
-			tieneesahora = false;
-			for (HorarioDto horariodto : listaHorarios) {
-				if(horariodto.getHor_hora_inicio().equals(hora)) {
-					listEnviar.add(horariodto);
-					tieneesahora = true;
-					break;
+			if(listaHorarios.size() > 0 ) {
+				esta = false;
+				for (HorarioDto hDto : listaHorarios) {
+					if(hora.equals(hDto.getHor_hora_inicio())) {
+						listEnviar.add(hDto);
+						listaHorarios.remove(hDto);
+						esta = true;
+						break;
+					}else {
+						esta = false;
+					}
 				}
-				if(tieneesahora == false) {
+				if(esta == false) {
 					HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ");
 					listEnviar.add(newHorariodto);
-					tieneesahora = false;
 				}
 			}
+			else {
+				HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ");
+				listEnviar.add(newHorariodto);
+			}
+			
 		}
 		return listEnviar;
 	}
