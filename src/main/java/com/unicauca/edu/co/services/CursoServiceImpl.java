@@ -76,4 +76,18 @@ public class CursoServiceImpl implements  ICursoService {
   		}
   		return new ResponseEntity<CursoResponseRest>(response, HttpStatus.OK);
   	}
+  	
+  	@Override
+  	public ResponseEntity<CursoResponseRest> cursosPorAsig(String asig_codigo) {
+  		CursoResponseRest response = new CursoResponseRest();
+  		try {
+  			List<Curso> list = cursoDao.listaByAsig(asig_codigo);
+  			response.getCursoResponse().setCursoAsig(list);
+  			response.setMetadata("Respuesta ok", "00", "Cursos encontrados");
+  		} catch (Exception e) {
+  			response.setMetadata("Respuesta nok", "-1", "Error al buscar cursos");
+  			return new ResponseEntity<CursoResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+  		}
+  		return new ResponseEntity<CursoResponseRest>(response, HttpStatus.OK);
+  	}
 }

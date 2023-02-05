@@ -15,4 +15,6 @@ public interface ICursoService {
     public ResponseEntity<CursoResponseRest> eliminarById(Long id);
     
     public ResponseEntity<CursoResponseRest> cursosPorFacultad(String fac_codigo);
+    
+    public ResponseEntity<CursoResponseRest> cursosPorAsig(String asig_codigo);
 }
