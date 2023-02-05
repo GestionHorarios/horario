@@ -125,6 +125,7 @@ public class RecursoRestController {
 	//Recursos Auditorio Salon Sala por fac_codigo
 	@GetMapping("/recursos/facaudisalasalon/{fac_codigo}")
 	public ResponseEntity<RecursoResponseRest> recursosPorFacAudiSalaSalon(@PathVariable String fac_codigo){
+		System.out.println("llamando al controller codigo: " + fac_codigo);
 		ResponseEntity<RecursoResponseRest> response = recursoService.recursosPorFacultadAudiSalaSalon(fac_codigo);
 		return response;
 	}
