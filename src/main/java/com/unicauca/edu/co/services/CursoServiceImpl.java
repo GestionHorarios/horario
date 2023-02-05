@@ -1,15 +1,9 @@
 package com.unicauca.edu.co.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-
 
 import com.unicauca.edu.co.model.Curso;
-import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.response.CursoResponseRest;
-import com.unicauca.edu.co.response.RecursoResponseRest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,8 +61,8 @@ public class CursoServiceImpl implements  ICursoService {
   	public ResponseEntity<CursoResponseRest> cursosPorFacultad(String fac_codigo) {
   		CursoResponseRest response = new CursoResponseRest();
   		try {
-  			List<Curso> list = cursoDao.listaByFacultad(fac_codigo);
-  			response.getCursoResponse().setCurso(list);
+//  			List<Curso> list = cursoDao.listaByFacultad(fac_codigo);
+//  			response.getCursoResponse().setCurso(list);
   			response.setMetadata("Respuesta ok", "00", "Cursos encontrados");
   		} catch (Exception e) {
   			response.setMetadata("Respuesta nok", "-1", "Error al buscar cursos");

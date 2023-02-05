@@ -35,22 +35,22 @@ public class Recurso implements Serializable{
 	private String rec_descripcion;
 	private boolean estado;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Tiporecurso tiporecurso;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Facultad facultad;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Ubicacion ubicacion;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	/*
 	@JoinTable(name = "asignacion",
 			joinColumns = { @JoinColumn(name = "fk_recursoUno")},
