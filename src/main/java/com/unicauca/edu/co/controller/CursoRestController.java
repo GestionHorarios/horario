@@ -1,13 +1,10 @@
 package com.unicauca.edu.co.controller;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.unicauca.edu.co.response.CursoResponseRest;
-import com.unicauca.edu.co.response.RecursoResponseRest;
 import com.unicauca.edu.co.services.ICursoService;
 
 
@@ -50,6 +47,7 @@ public class CursoRestController {
   //Curso por Asignatura
   	@GetMapping("/cursos/asignatura/{asig_codigo}")
   	public ResponseEntity<CursoResponseRest> cursosPorAsig(@PathVariable String asig_codigo){
+  		System.out.println("llamando "+asig_codigo);
   		ResponseEntity<CursoResponseRest> response = cursoService.cursosPorAsig(asig_codigo);
   		return response;
   	}

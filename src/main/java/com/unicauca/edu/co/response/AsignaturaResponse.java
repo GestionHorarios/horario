@@ -2,7 +2,7 @@ package com.unicauca.edu.co.response;
 
 import java.util.List;
 
-import com.unicauca.edu.co.model.Curso;
+import com.unicauca.edu.co.model.Asignatura;
 
 public class AsignaturaResponse {
 	

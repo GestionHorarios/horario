@@ -18,6 +18,7 @@ public class Periodo implements Serializable{
 	private String per_nombre;
 	private Date per_fechainicio;
 	private Date per_fechafin;
+	
 	public String getPer_codigo() {
 		return per_codigo;
 	}

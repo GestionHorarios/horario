@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="asignatura")
 public class Asignatura implements Serializable{
@@ -22,6 +24,7 @@ public class Asignatura implements Serializable{
 	private String asig_modalidad;
 	private String asig_color;
 	private String asig_observacioens;
+	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Programa programa;
 	
