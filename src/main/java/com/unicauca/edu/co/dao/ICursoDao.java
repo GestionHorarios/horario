@@ -14,4 +14,7 @@ public interface ICursoDao extends CrudRepository<Curso, Long> {
     
     @Query(nativeQuery=true,value="SELECT DISTINCT * FROM curso INNER JOIN asignatura ON curso.asignatura_asig_codigo = asignatura.asig_codigo INNER JOIN programa ON asignatura.programa_prog_codigo = programa.prog_codigo INNER JOIN departamento ON programa.departamento_dep_codigo = departamento.dep_codigo INNER JOIN facultad ON departamento.facultad_fac_codigo = facultad.fac_codigo WHERE facultad.fac_codigo = ?1")
     List<Curso> listaByFacultad(String fac_codigo);
+    
+    @Query(nativeQuery=true,value="SELECT DISTINCT * FROM curso INNER JOIN asignatura ON asignatura.asig_codigo = curso.asignatura_asig_codigo WHERE asignatura_asig_codigo = ?1")
+    List<Curso> listaByAsig(String asig_codigo);
 }

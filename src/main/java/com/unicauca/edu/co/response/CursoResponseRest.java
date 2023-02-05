@@ -11,5 +11,4 @@ public class CursoResponseRest extends ResponseRest{
     public void setCursoResponse(CursoResponse cursoResponse) {
         this.cursoResponse = cursoResponse;
     }
-
 }

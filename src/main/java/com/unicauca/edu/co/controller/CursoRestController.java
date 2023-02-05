@@ -46,4 +46,11 @@ public class CursoRestController {
   		ResponseEntity<CursoResponseRest> response = cursoService.cursosPorFacultad(fac_codigo);
   		return response;
   	}
+  	
+  //Curso por Asignatura
+  	@GetMapping("/cursos/asignatura/{asig_codigo}")
+  	public ResponseEntity<CursoResponseRest> cursosPorAsig(@PathVariable String asig_codigo){
+  		ResponseEntity<CursoResponseRest> response = cursoService.cursosPorAsig(asig_codigo);
+  		return response;
+  	}
 }
