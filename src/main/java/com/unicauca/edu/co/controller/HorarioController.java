@@ -33,9 +33,7 @@ public class HorarioController {
 		List<HorarioDto> listaJueves = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("JUEVES",recurso_id));
 		List<HorarioDto> listaViernes = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("VIERNES",recurso_id));
 		List<HorarioDto> listaSabado = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("SABADO",recurso_id));
-//		for (HorarioDto lunes : listaLunes) {
-//			System.out.println(lunes.toString());
-//		}
+		String[] horasImpares = {"7:00 AM <br> 8:00 AM","9:00 AM <br> 10:00 AM","11:00 AM <br> 12:00 PM","02:00 PM <br> 03:00 PM","04:00 PM <br> 05:00 PM","06:00 PM <br> 07:00 PM","08:00 PM <br> 10:00 PM"};
 		modelo.addAttribute("lunes",listaLunes);
 		modelo.addAttribute("martes",listaMartes);
 		modelo.addAttribute("miercoles",listaMiercoles);
@@ -43,7 +41,7 @@ public class HorarioController {
 		modelo.addAttribute("viernes",listaViernes);
 		modelo.addAttribute("sabado",listaSabado);
 		modelo.addAttribute("recurso",recursoDao.findById(recurso_id).get());
-		modelo.addAttribute("color", "rgb(102, 255, 153)");
+		modelo.addAttribute("horas", horasImpares);
 		return "horario/listhorario";
 	}
 	
@@ -55,7 +53,7 @@ public class HorarioController {
 		}
 		List<HorarioDto> listaHDto = new ArrayList<HorarioDto>();
 		for (HorarioProjection h : hprojection) {
-			HorarioDto objHorario = new HorarioDto(h.getCur_id(),h.getHor_dia(),h.getHor_hora_inicio(),h.getHor_hora_fin(),h.getRec_id(),h.getCur_id(),h.getAsig_nombre(),h.getCur_nombre());
+			HorarioDto objHorario = new HorarioDto(h.getCur_id(),h.getHor_dia(),h.getHor_hora_inicio(),h.getHor_hora_fin(),h.getRec_id(),h.getCur_id(),h.getAsig_nombre(),h.getCur_nombre(),h.getAsig_color());
 			listaHDto.add(objHorario);
 		}
 		return listaHDto;
@@ -80,12 +78,12 @@ public class HorarioController {
 					}
 				}
 				if(esta == false) {
-					HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ");
+					HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ",null);
 					listEnviar.add(newHorariodto);
 				}
 			}
 			else {
-				HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ");
+				HorarioDto newHorariodto = new HorarioDto(null, "", hora, null, null,null, " ", " ",null);
 				listEnviar.add(newHorariodto);
 			}
 			

@@ -14,6 +14,7 @@ public class HorarioDto implements Serializable{
 	private Long cusro_id;
 	private String asig_nombre;
 	private String cur_nombre;
+	private String asig_color;
 	
 	public HorarioDto() {}
 	
@@ -28,7 +29,7 @@ public class HorarioDto implements Serializable{
 		
 	}
 	public HorarioDto(Long hor_id, String hor_dia, String hor_hora_inicio, String hor_hora_fin, Long recurso_id,
-			Long cusro_id, String asig_nombre, String cur_nombre) {
+			Long cusro_id, String asig_nombre, String cur_nombre, String asig_color) {
 		this.hor_id = hor_id;
 		this.hor_dia = hor_dia;
 		this.hor_hora_inicio = hor_hora_inicio;
@@ -37,6 +38,7 @@ public class HorarioDto implements Serializable{
 		this.cusro_id = cusro_id;
 		this.asig_nombre = asig_nombre;
 		this.cur_nombre = cur_nombre;
+		this.asig_color = asig_color;
 	}
 	public Long getHor_id() {
 		return hor_id;
@@ -86,10 +88,18 @@ public class HorarioDto implements Serializable{
 	public void setCur_nombre(String cur_nombre) {
 		this.cur_nombre = cur_nombre;
 	}
+	public String getAsig_color() {
+		return asig_color;
+	}
+
+	public void setAsig_color(String asig_color) {
+		this.asig_color = asig_color;
+	}
 	@Override
 	public String toString() {
 		return "HorarioDto [hor_id=" + hor_id + ", hor_dia=" + hor_dia + ", hor_hora_inicio=" + hor_hora_inicio
 				+ ", hor_hora_fin=" + hor_hora_fin + ", recurso_id=" + recurso_id + ", cusro_id=" + cusro_id
 				+ ", asig_nombre=" + asig_nombre + ", cur_nombre=" + cur_nombre + "]";
 	}
+	
 }

@@ -20,6 +20,7 @@ public class Asignatura implements Serializable{
 	private String asig_intensidad;
 	private String asig_semestre;
 	private String asig_modalidad;
+	private String asig_color;
 	private String asig_observacioens;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Programa programa;
@@ -65,6 +66,12 @@ public class Asignatura implements Serializable{
 	}
 	public void setPrograma(Programa programa) {
 		this.programa = programa;
+	}
+	public String getAsig_color() {
+		return asig_color;
+	}
+	public void setAsig_color(String asig_color) {
+		this.asig_color = asig_color;
 	}
 	
 }

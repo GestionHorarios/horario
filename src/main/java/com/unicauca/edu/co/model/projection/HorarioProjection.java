@@ -9,4 +9,5 @@ public interface HorarioProjection {
 	public Long getCur_id();
 	public String getCur_nombre();
 	public String getAsig_nombre();	
+	public String getAsig_color();
 }
