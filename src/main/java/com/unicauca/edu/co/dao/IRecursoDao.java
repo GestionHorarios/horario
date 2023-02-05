@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.unicauca.edu.co.model.Recurso;
+import com.unicauca.edu.co.model.projection.RecursoProjection;
 
 public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 
@@ -17,4 +18,11 @@ public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 	
 	@Query("SELECT r from Recurso r where r.tiporecurso.rectipo_codigo <> 'Salon' AND r.tiporecurso.rectipo_codigo <> 'Sala' AND r.tiporecurso.rectipo_codigo <> 'Auditorio' And r.facultad.fac_codigo = ?1 AND r.estado = false")
 	List<Recurso> recursosPorFacultadDiferenteAudiSalaSalon(String fac_codigo);
+	
+	//consultas
+	@Query(nativeQuery= true, value = "SELECT r.rec_id, r.rec_codigo, f.fac_codigo, r.rec_descripcion, r.rec_capmax, r.rec_nombre, tr.rectipo_codigo, u.ubi_codigo "
+			+ " FROM recurso AS r INNER JOIN facultad AS f ON r.facultad_fac_codigo = f.fac_codigo "
+			+ " INNER JOIN tiporecurso AS tr ON r.tiporecurso_rectipo_codigo = tr.rectipo_codigo "
+			+ " INNER JOIN ubicacion AS u ON f.ubicacion_ubi_codigo = u.ubi_codigo AND r.ubicacion_ubi_codigo = u.ubi_codigo ")
+	List<RecursoProjection> listarRecursos();
 }

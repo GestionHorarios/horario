@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -34,18 +35,22 @@ public class Recurso implements Serializable{
 	private String rec_descripcion;
 	private boolean estado;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Tiporecurso tiporecurso;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Facultad facultad;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
 	private Ubicacion ubicacion;
 	
+	@JsonIgnore
 	/*
 	@JoinTable(name = "asignacion",
 			joinColumns = { @JoinColumn(name = "fk_recursoUno")},
@@ -63,6 +68,7 @@ public class Recurso implements Serializable{
 	//@ManyToMany(mappedBy= "recursoUno")
 	//List<Recurso> recursoDos;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recurso")
 	private List<Horario> horarios;
 	
