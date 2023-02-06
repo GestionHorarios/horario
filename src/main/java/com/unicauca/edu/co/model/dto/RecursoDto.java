@@ -10,7 +10,6 @@ public class RecursoDto {
 	private String Rec_nombre;
 	private String Rectipo_codigo;
 	private String Ubi_codigo;
-
 	
 	public RecursoDto(Long rec_id, String rec_codigo, String fac_codigo, String rec_descripcion, Integer rec_capmax,
 			String rec_nombre, String rectipo_codigo, String ubi_codigo) {
@@ -71,5 +70,4 @@ public class RecursoDto {
 	public void setUbi_codigo(String ubi_codigo) {
 		Ubi_codigo = ubi_codigo;
 	}
-	
 }
