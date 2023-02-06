@@ -14,7 +14,7 @@ public interface IRecursoDao extends CrudRepository<Recurso, Long> {
 	List<Recurso> findByRec_codigo(String rec_codigo);
 	
 	//consulta que trae los recursos de una facultad iguales a sala salon auditorio
-	@Query(nativeQuery = true, value= "SELECT r.* FROM recurso AS r WHERE r.facultad_fac_codigo = ?1 AND r.tiporecurso_rectipo_codigo = 'Sala' OR 'Auditorio' OR 'Salon' ")
+	@Query(nativeQuery = true, value= "SELECT r.* FROM recurso AS r WHERE r.facultad_fac_codigo = ?1 AND (r.tiporecurso_rectipo_codigo = 'Sala' OR r.tiporecurso_rectipo_codigo = 'Salon' OR r.tiporecurso_rectipo_codigo = 'Auditorio') ")
 	List<Recurso> recursosPorFacultadAudiSalaSalon (String fac_codigo);
 	
 	//consulta que trae los recursos de una facultad diferentes a sala salon auditorio
