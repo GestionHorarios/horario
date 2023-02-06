@@ -18,8 +18,6 @@ import com.unicauca.edu.co.model.Facultad;
 import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.model.Tiporecurso;
 import com.unicauca.edu.co.model.Ubicacion;
-import com.unicauca.edu.co.model.dto.RecursoDto;
-import com.unicauca.edu.co.model.projection.RecursoProjection;
 import com.unicauca.edu.co.response.RecursoResponseRest;
 
 @Service
@@ -43,13 +41,15 @@ public class RecursoServiceImpl implements IRecursoService{
 	public ResponseEntity<RecursoResponseRest> listar() {
 		RecursoResponseRest response = new RecursoResponseRest();
 		try {
-			List<RecursoProjection> recProjection = recursoDao.listarRecursos();
-			List<RecursoDto> recursosDto = new ArrayList<RecursoDto>();
-			for (RecursoProjection r : recProjection) {
-				RecursoDto rObjDto = new RecursoDto(r.getRec_id(),r.getRec_codigo(),r.getFac_codigo(),r.getRec_descripcion(),r.getRec_capmax(),r.getRec_nombre(),r.getRectipo_codigo(),r.getUbi_codigo());
-				recursosDto.add(rObjDto);
-			}
-			response.getRecursoResponse().setRecursoDto(recursosDto);
+//			List<RecursoProjection> recProjection = recursoDao.listarRecursos();
+			List<Recurso> lis = (List<Recurso>) recursoDao.findAll();
+			response.getRecursoResponse().setRecurso(lis);
+//			List<RecursoDto> recursosDto = new ArrayList<RecursoDto>();
+//			for (RecursoProjection r : recProjection) {
+//				RecursoDto rObjDto = new RecursoDto(r.getRec_id(),r.getRec_codigo(),r.getFac_codigo(),r.getRec_descripcion(),r.getRec_capmax(),r.getRec_nombre(),r.getRectipo_codigo(),r.getUbi_codigo());
+//				recursosDto.add(rObjDto);
+//			}
+//			response.getRecursoResponse().setRecursoDto(recursosDto);
 			response.setMetadata("Respuesta ok", "00", "Respuesta exitosa");
 		}catch (Exception e) {
 			response.setMetadata("Respuesta nok", "-1", "Error al consultar");
