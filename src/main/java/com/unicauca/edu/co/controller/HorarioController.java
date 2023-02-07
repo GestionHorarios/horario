@@ -8,10 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.unicauca.edu.co.dao.IFacultadDao;
 import com.unicauca.edu.co.dao.IHorarioDao;
 import com.unicauca.edu.co.dao.IRecursoDao;
+import com.unicauca.edu.co.model.Facultad;
+import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.model.dto.HorarioDto;
 import com.unicauca.edu.co.model.projection.HorarioProjection;
 
@@ -25,6 +29,20 @@ public class HorarioController {
 	@Autowired
 	private IRecursoDao recursoDao;
 	
+	@Autowired
+	private IFacultadDao facultadDao;
+	
+	
+	@GetMapping("/organizarHorario")
+	public String organizarHorario(Model modelo){
+		System.out.println("llamando a organizar horario");
+		List<Facultad> listaFacultades = (List<Facultad>) facultadDao.findAll();
+		modelo.addAttribute("facultades", listaFacultades);
+		return "horario/organizarHorario";
+	}
+	
+	
+	//vista para ver el horario de un recurso
 	@GetMapping("/vista/{recurso_id}")
 	public String berHorario(@PathVariable Long recurso_id, Model modelo) {
 		List<HorarioDto> listaLunes = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("LUNES",recurso_id));
@@ -89,5 +107,11 @@ public class HorarioController {
 			
 		}
 		return listEnviar;
+	}
+
+	@GetMapping(value ="/recursos/{id_recurso}", produces= {"application/json"})
+	public @ResponseBody List<Recurso> recursosPorRecurso(@PathVariable String id_recurso) {
+		System.out.println("llamado a recurusos por id");
+		return recursoDao.recursosPorFacultadAudiSalaSalon(id_recurso);
 	}
 }
