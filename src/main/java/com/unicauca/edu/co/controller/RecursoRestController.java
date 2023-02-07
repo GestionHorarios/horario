@@ -78,8 +78,7 @@ public class RecursoRestController {
 			@RequestParam("fac_codigo") String fac_codigo,
 			@Nullable @RequestParam(value="rec_capmax") Integer capmax,
 			@RequestParam("rec_nombre") String rec_nombre,
-			@RequestParam("rec_decripcion")String rec_descripcion,
-			@RequestParam("ubi_codigo") String ubi_codigo
+			@RequestParam("rec_decripcion")String rec_descripcion
 			) throws IOException
 	{
 		Recurso recurso = new Recurso();
@@ -88,7 +87,7 @@ public class RecursoRestController {
 		recurso.setRec_nombre(rec_nombre);
 		recurso.setRec_descripcion(rec_descripcion);
 		recurso.setEstado(false);
-		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo,ubi_codigo);
+		ResponseEntity<RecursoResponseRest> response = recursoService.guardar(recurso,rectipo_codigo, fac_codigo);
 		return response;
 	}
 
