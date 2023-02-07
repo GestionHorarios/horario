@@ -11,6 +11,6 @@ public interface IHorarioService {
 	public ResponseEntity<HorarioResponseRest> buscarById();
 	public ResponseEntity<HorarioResponseRest> buscarRecursoDiaHIniHFin(Horario horario, Long recurso_id);
 	public ResponseEntity<HorarioResponseRest> asigHorarioaRecurso(Horario horario, Long recurso_id, Long curso_id);
-	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(Long horario_id);
+	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(String horario_id);
 	public ResponseEntity<HorarioResponseRest> listarHorariosDeRecurso(Long horario_id);
 }

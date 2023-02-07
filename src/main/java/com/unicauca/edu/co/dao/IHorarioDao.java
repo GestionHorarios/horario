@@ -24,6 +24,11 @@ public interface IHorarioDao extends CrudRepository<Horario, Long> {
 			+ " FROM horario AS h INNER JOIN curso AS c ON  h.curso_cur_id = c.cur_id INNER JOIN asignatura AS a ON c.asignatura_asig_codigo = a.asig_codigo "
 			+ " WHERE h.hor_dia = ?1 AND h.recurso_rec_id = ?2 ORDER BY h.hor_hora_inicio ASC ")
 	List<HorarioProjection> listaHorarioPorDiaDeUnRecursos(String dia, Long recurso_id);
+	
+	@Query(nativeQuery=true,value ="DELETE FROM horario WHERE recurso_rec_id = ?1")
+	void eliminarHorario(String recurso_id);
+	
+//	deleteByRecursorRec_id();
 }
 //@Query("SELECT new com.chapumix.apihusj.app.model.entity.dto.GenPacienDTO(p.pacNumDoc, p.pacPriNom, p.pacSegNom, p.pacPriApe, p.pacSegApe, p.gpafecnac) FROM GenPacien p JOIN p.adnIngreso i WHERE i.ainEstado = 0 AND p.pacNumDoc LIKE %?1%")
 //List<GenPacienDTO> pacienteSticker(String numDoc);
