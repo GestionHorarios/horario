@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,8 @@ import com.unicauca.edu.co.model.dto.HorarioDto;
 import com.unicauca.edu.co.model.projection.HorarioProjection;
 
 @Controller
-@RequestMapping("/horario")
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = {"http://192.168.101.11:4200/","http://localhost:4200/"})
 public class HorarioController {
 	
 	@Autowired
@@ -43,7 +45,7 @@ public class HorarioController {
 	
 	
 	//vista para ver el horario de un recurso
-	@GetMapping("/vista/{recurso_id}")
+	@GetMapping("/horario/vista/{recurso_id}")
 	public String berHorario(@PathVariable Long recurso_id, Model modelo) {
 		List<HorarioDto> listaLunes = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("LUNES",recurso_id));
 		List<HorarioDto> listaMartes = horariosConfirmados(loqdevuelvelaConsultaPorjectionADto("MARTES",recurso_id));

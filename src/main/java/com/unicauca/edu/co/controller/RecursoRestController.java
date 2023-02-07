@@ -100,8 +100,7 @@ public class RecursoRestController {
 			@RequestParam(value="rec_capmax", required = false) String capmax,
 			@RequestParam("rec_nombre") String rec_nombre,
 			@RequestParam("rec_decripcion")String rec_descripcion,
-			@RequestParam("ubi_codigo") String ubi_codigo,
-			@PathVariable Long id)
+			@PathVariable Long id_recurso)//id del recurso que se va a actualizar
 {
 		Recurso recurso = new Recurso();
 		recurso.setRec_codigo(rec_codigo);
@@ -110,7 +109,7 @@ public class RecursoRestController {
 		}
 		recurso.setRec_nombre(rec_nombre);
 		recurso.setRec_descripcion(rec_descripcion);
-		ResponseEntity<RecursoResponseRest> response = recursoService.actualizar(recurso,id,rectipo_codigo,fac_codigo,ubi_codigo);
+		ResponseEntity<RecursoResponseRest> response = recursoService.actualizar(recurso,id_recurso,rectipo_codigo,fac_codigo);
 		return response;
 	}
 	
