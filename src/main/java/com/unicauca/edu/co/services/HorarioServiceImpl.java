@@ -1,6 +1,10 @@
 package com.unicauca.edu.co.services;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,8 +87,26 @@ public class HorarioServiceImpl  implements IHorarioService{
 	public ResponseEntity<HorarioResponseRest> asigHorarioaRecurso(Horario horario, Long recurso_id, Long curso_id) {
 		HorarioResponseRest response = new HorarioResponseRest();
 		try {
+			List<HorarioProjection> esta = horarioDao.buscarRecursoDiaHIniHFin(recurso_id, horario.getHor_dia() , horario.getHor_hora_inicio(), horario.getHor_hora_fin());
+			if(esta.size() > 0) {//validación si ese recurso ya tiene asiganda esa hora inicio y fin
+				response.setMetadata("Respuesta nok", "-1", "Este recurso ya esta ocupado ese dia y en esas horas");
+				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
+			}
+			String[] hsInicio = horario.getHor_hora_inicio().split(":");
+			String[] hsFin = horario.getHor_hora_fin().split(":");
+			int hi = Integer.parseInt(hsInicio[0]);
+			int hf = Integer.parseInt(hsFin[0]);
+			if((hf-hi) != 2) {//validando las horas, si hay mas de dos horas entre ellas, o la hi > hf
+				response.setMetadata("Respuesta nok", "-1", "hay un error en las horas");
+				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
+			}
 			Optional<Recurso> recurso = recursoDao.findById(recurso_id);
 			Optional<Curso> curso = cursoDao.findById(curso_id);
+			if(recurso.get().getRec_capmax() < curso.get().getCur_capmax()) {//validando que el recurso tenga la capacidad que el curso requiere
+				response.setMetadata("Respuesta nok", "-1", "El recurso no cumple con la capacidad maxima que requiere el curso");
+				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
+			}
+			
 			horario.setCurso(curso.get());
 			horario.setRecurso(recurso.get());
 			horarioDao.save(horario);
