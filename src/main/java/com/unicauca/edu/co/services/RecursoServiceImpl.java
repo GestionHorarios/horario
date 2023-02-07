@@ -106,19 +106,19 @@ public class RecursoServiceImpl implements IRecursoService{
 
 	//guardar recurso
 	@Override
-	public ResponseEntity<RecursoResponseRest> guardar(Recurso recurso, String rectipo_codigo, String fac_codigo, String ubi_codigo) {
+	public ResponseEntity<RecursoResponseRest> guardar(Recurso recurso, String rectipo_codigo, String fac_codigo) {
 		RecursoResponseRest response = new RecursoResponseRest();
 		List<Recurso> list = new ArrayList<>();
 		try {
 			
 			Optional<Tiporecurso> tiporecurso = tipoRecursoDao.findById(rectipo_codigo);
 			Optional<Facultad> facultad = facultadDao.findById(fac_codigo);
-			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
+//			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
 			
-			if(tiporecurso.isPresent() && facultad.isPresent() && ubicacion.isPresent()) {
+			if(tiporecurso.isPresent() && facultad.isPresent() ) {
 				recurso.setTiporecurso(tiporecurso.get());
 				recurso.setFacultad(facultad.get());;
-				recurso.setUbicacion(ubicacion.get());
+//				recurso.setUbicacion(ubicacion.get());
 			}else {
 				response.setMetadata("respuesta ok", "-1" ,"Tipo recurso, Facultad, Ubicacion no se encuentra");
 				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.NOT_FOUND);
