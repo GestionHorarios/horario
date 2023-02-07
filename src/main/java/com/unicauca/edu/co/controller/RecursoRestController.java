@@ -92,7 +92,7 @@ public class RecursoRestController {
 	}
 
 	//actualizamos recurso
-	@PutMapping("/recursos/{id}")
+	@PutMapping("/recursos/{id_recurso}")
 	public ResponseEntity<RecursoResponseRest> actulizarRecurso(
 			@RequestParam("rec_codigo") String rec_codigo,
 			@RequestParam("rectipo_codigo")String rectipo_codigo,
