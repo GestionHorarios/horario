@@ -1,99 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Horario</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta charset="ISO-8859-1">
+	<title>Horario</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<style>
+		body {
 
+			background: rgb(174, 182, 238);
+			background: radial-gradient(circle, rgba(174, 182, 238, 0.6474964985994398) 0%, rgba(148, 187, 233, 0.03125) 100%);
+		}
+	</style>
+	<style type="text/css">
+		html,
+		body {
+			margin: 0px;
+			height: 100%;
+		}
+	</style>
 </head>
-<body>
-	<img src="https://www.shutterstock.com/image-vector/schedule-icon-calendar-time-vector-260nw-1687100644.jpg" width="136" height="136" >
-	<h1 class="text-primary" th:text="'Recurso: '+${recurso.rec_descripcion}+' '+${recurso.rec_nombre}"></h1>
 
-	<table class="table table-striped table-bordered table-hover">
-	 	<thead>
-	 		<tr>
-	 			<th>HORARIO</th>
-	 		</tr>
-	 		<tr>
-			  	<tr id="Cabecera_2">
-                <th>HORA</th>
-                <th>LUNES</th>
-                <th>MARTES</th>
-                <th>MIERCOLES</th>
-                <th>JUEVES</th>
-                <th>VIERNES</th>
-                <th>SABADO</th>
-            </tr>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="i : ${#numbers.sequence(0, 6)}">
-				<td th:utext="${horas[i]}"></td>
-				<td th:style="'background-color: '+${lunes[i].asig_color}+';'" th:text="${lunes[i].asig_nombre}+' '+${lunes[i].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[i].asig_color}+';'" th:text="${martes[i].asig_nombre}+' '+${martes[i].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[i].asig_color}+';'" th:text="${miercoles[i].asig_nombre}+' '+${miercoles[i].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[i].asig_color}+';'" th:text="${jueves[i].asig_nombre}+' '+${jueves[i].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[i].asig_color}+';'" th:text="${viernes[i].asig_nombre}+' '+${viernes[i].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[i].asig_color}+';'" th:text="${sabado[i].asig_nombre}+' '+${sabado[i].cur_nombre}"></td> 
-            </tr>
-<!--		<tr>
-				<td>9:00 AM <br> 10:00 AM</td>
-				<td th:style="'background-color: '+${lunes[1].asig_color}+';'" th:text="${lunes[1].asig_nombre}+' '+${lunes[1].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[1].asig_color}+';'" th:text="${martes[1].asig_nombre}+' '+${martes[1].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[1].asig_color}+';'" th:text="${miercoles[1].asig_nombre}+' '+${miercoles[1].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[1].asig_color}+';'" th:text="${jueves[1].asig_nombre}+' '+${jueves[1].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[1].asig_color}+';'" th:text="${viernes[1].asig_nombre}+' '+${viernes[1].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[1].asig_color}+';'" th:text="${sabado[1].asig_nombre}+' '+${sabado[1].cur_nombre}"></td>
-            </tr>
-            <tr>
-				<td>11:00 AM <br> 12:00 PM</td>
-				<td th:style="'background-color: '+${lunes[2].asig_color}+';'" th:text="${lunes[2].asig_nombre}+' '+${lunes[2].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[2].asig_color}+';'" th:text="${martes[2].asig_nombre}+' '+${martes[2].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[2].asig_color}+';'" th:text="${miercoles[2].asig_nombre}+' '+${miercoles[2].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[2].asig_color}+';'" th:text="${jueves[2].asig_nombre}+' '+${jueves[2].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[2].asig_color}+';'" th:text="${viernes[2].asig_nombre}+' '+${viernes[2].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[2].asig_color}+';'" th:text="${sabado[2].asig_nombre}+' '+${sabado[2].cur_nombre}"></td>
-            </tr>
-            <tr>
-				<td>02:00 PM <br> 03:00 PM</td>
-				<td th:style="'background-color: '+${lunes[3].asig_color}+';'" th:text="${lunes[3].asig_nombre}+' '+${lunes[3].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[3].asig_color}+';'" th:text="${martes[3].asig_nombre}+' '+${martes[3].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[3].asig_color}+';'" th:text="${miercoles[3].asig_nombre}+' '+${miercoles[3].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[3].asig_color}+';'" th:text="${jueves[3].asig_nombre}+' '+${jueves[3].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[3].asig_color}+';'" th:text="${viernes[3].asig_nombre}+' '+${viernes[3].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[3].asig_color}+';'" th:text="${sabado[3].asig_nombre}+' '+${sabado[3].cur_nombre}"></td>
-            </tr>
-            <tr>
-				<td>04:00 PM <br> 05:00 PM</td>
-				<td th:style="'background-color: '+${lunes[4].asig_color}+';'" th:text="${lunes[4].asig_nombre}+' '+${lunes[4].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[4].asig_color}+';'" th:text="${martes[4].asig_nombre}+' '+${martes[4].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[4].asig_color}+';'" th:text="${miercoles[4].asig_nombre}+' '+${miercoles[4].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[4].asig_color}+';'" th:text="${jueves[4].asig_nombre}+' '+${jueves[4].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[4].asig_color}+';'" th:text="${viernes[4].asig_nombre}+' '+${viernes[4].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[4].asig_color}+';'" th:text="${sabado[4].asig_nombre}+' '+${sabado[4].cur_nombre}"></td>
-            </tr>
-            <tr>
-				<td>06:00 PM <br> 07:00 PM</td>
-				<td th:style="'background-color: '+${lunes[5].asig_color}+';'" th:text="${lunes[5].asig_nombre}+' '+${lunes[5].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[5].asig_color}+';'" th:text="${martes[5].asig_nombre}+' '+${martes[5].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[5].asig_color}+';'" th:text="${miercoles[5].asig_nombre}+' '+${miercoles[5].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[5].asig_color}+';'" th:text="${jueves[5].asig_nombre}+' '+${jueves[5].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[5].asig_color}+';'" th:text="${viernes[5].asig_nombre}+' '+${viernes[5].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[5].asig_color}+';'" th:text="${sabado[5].asig_nombre}+' '+${sabado[5].cur_nombre}"></td>
-            </tr>
-            <tr>
-				<td>08:00 PM <br> 10:00 PM</td>
-				<td th:style="'background-color: '+${lunes[6].asig_color}+';'" th:text="${lunes[6].asig_nombre}+' '+${lunes[6].cur_nombre}"></td>
-				<td th:style="'background-color: '+${martes[6].asig_color}+';'" th:text="${martes[6].asig_nombre}+' '+${martes[6].cur_nombre}"></td>
-				<td th:style="'background-color: '+${miercoles[6].asig_color}+';'" th:text="${miercoles[6].asig_nombre}+' '+${miercoles[6].cur_nombre}"></td>
-				<td th:style="'background-color: '+${jueves[6].asig_color}+';'" th:text="${jueves[6].asig_nombre}+' '+${jueves[6].cur_nombre}"></td>
-				<td th:style="'background-color: '+${viernes[6].asig_color}+';'" th:text="${viernes[6].asig_nombre}+' '+${viernes[6].cur_nombre}"></td>
-				<td th:style="'background-color: '+${sabado[6].asig_color}+';'" th:text="${sabado[6].asig_nombre}+' '+${sabado[6].cur_nombre}"></td>
-            </tr>
-	-->            
-		</tbody>	 
-	</table> 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<body>
+<br><br>
+	<div class="container p-2">
+		<div class="card">
+			<div class="card-header">
+				<h1 class="text-primary text-center" th:text="'HORARIO: '+${recurso.rec_descripcion}+' '+${recurso.rec_nombre}"> </h1>
+			</div>
+			<table class="table table-striped table-bordered ">
+				<thead>
+
+					
+					<tr id="Cabecera_2">
+						<th>HORA</th>
+						<th>LUNES</th>
+						<th>MARTES</th>
+						<th>MIERCOLES</th>
+						<th>JUEVES</th>
+						<th>VIERNES</th>
+						<th>SABADO</th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					<tr th:each="i : ${#numbers.sequence(0, 6)}">
+						<td th:utext="${horas[i]}"> </td>
+						<td th:style="'background-color: '+${lunes[i].asig_color}+';'" th:text="${lunes[i].asig_nombre}+' '+${lunes[i].cur_nombre}"></td>
+						<td th:style="'background-color: '+${martes[i].asig_color}+';'" th:text="${martes[i].asig_nombre}+' '+${martes[i].cur_nombre}"></td>
+						<td th:style="'background-color: '+${miercoles[i].asig_color}+';'" th:text="${miercoles[i].asig_nombre}+' '+${miercoles[i].cur_nombre}"></td>
+						<td th:style="'background-color: '+${jueves[i].asig_color}+';'" th:text="${jueves[i].asig_nombre}+' '+${jueves[i].cur_nombre}"></td>
+						<td th:style="'background-color: '+${viernes[i].asig_color}+';'" th:text="${viernes[i].asig_nombre}+' '+${viernes[i].cur_nombre}"></td>
+						<td th:style="'background-color: '+${sabado[i].asig_color}+';'" th:text="${sabado[i].asig_nombre}+' '+${sabado[i].cur_nombre}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
+
 </html>

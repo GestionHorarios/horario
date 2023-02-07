@@ -89,7 +89,7 @@ public class HorarioServiceImpl  implements IHorarioService{
 		try {
 			List<HorarioProjection> esta = horarioDao.buscarRecursoDiaHIniHFin(recurso_id, horario.getHor_dia() , horario.getHor_hora_inicio(), horario.getHor_hora_fin());
 			if(esta.size() > 0) {//validación si ese recurso ya tiene asiganda esa hora inicio y fin
-				response.setMetadata("Respuesta nok", "-1", "Este recurso ya esta ocupado ese dia y en esas horas");
+				response.setMetadata("Respuesta nok", "200", "Este recurso ya esta ocupado ese dia y en esas horas");
 				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
 			}
 			String[] hsInicio = horario.getHor_hora_inicio().split(":");
@@ -97,13 +97,13 @@ public class HorarioServiceImpl  implements IHorarioService{
 			int hi = Integer.parseInt(hsInicio[0]);
 			int hf = Integer.parseInt(hsFin[0]);
 			if((hf-hi) != 2) {//validando las horas, si hay mas de dos horas entre ellas, o la hi > hf
-				response.setMetadata("Respuesta nok", "-1", "hay un error en las horas");
+				response.setMetadata("Respuesta nok", "300", "hay un error en las horas");
 				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
 			}
 			Optional<Recurso> recurso = recursoDao.findById(recurso_id);
 			Optional<Curso> curso = cursoDao.findById(curso_id);
 			if(recurso.get().getRec_capmax() < curso.get().getCur_capmax()) {//validando que el recurso tenga la capacidad que el curso requiere
-				response.setMetadata("Respuesta nok", "-1", "El recurso no cumple con la capacidad maxima que requiere el curso");
+				response.setMetadata("Respuesta nok", "400", "El recurso no cumple con la capacidad maxima que requiere el curso");
 				return new ResponseEntity<HorarioResponseRest> (response, HttpStatus.BAD_REQUEST);
 			}
 			
@@ -121,11 +121,11 @@ public class HorarioServiceImpl  implements IHorarioService{
 
 	//metodo para desagregar horario un recurso una hinicio, hfin, y el curso
 	@Override
-	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(Long horario_id) {
+	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(String recurso_id) {
 		HorarioResponseRest response = new HorarioResponseRest();
 		try {
-			Optional<Horario> horario = horarioDao.findById(horario_id);
-			horarioDao.delete(horario.get());
+//			Optional<Horario> horario = horarioDao.findById(horario_id);
+			horarioDao.eliminarHorario(recurso_id);
 			response.setMetadata("respuesta ok", "00", "Horario eliminado");
 		} catch (Exception e) {
 			response.setMetadata("Respuesta nok", "-1", "Error al eliminar");
