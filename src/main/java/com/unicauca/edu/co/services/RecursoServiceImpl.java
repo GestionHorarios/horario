@@ -13,11 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unicauca.edu.co.dao.IFacultadDao;
 import com.unicauca.edu.co.dao.IRecursoDao;
 import com.unicauca.edu.co.dao.ITipoRecursoDao;
-import com.unicauca.edu.co.dao.IUbicacionDao;
 import com.unicauca.edu.co.model.Facultad;
 import com.unicauca.edu.co.model.Recurso;
 import com.unicauca.edu.co.model.Tiporecurso;
-import com.unicauca.edu.co.model.Ubicacion;
 import com.unicauca.edu.co.response.RecursoResponseRest;
 
 @Service
@@ -31,9 +29,6 @@ public class RecursoServiceImpl implements IRecursoService{
 	
 	@Autowired
 	private IFacultadDao facultadDao;
-	
-	@Autowired
-	private IUbicacionDao ubicacionDao;
 
 	//listar todos los recursos
 	@Override
@@ -41,15 +36,8 @@ public class RecursoServiceImpl implements IRecursoService{
 	public ResponseEntity<RecursoResponseRest> listar() {
 		RecursoResponseRest response = new RecursoResponseRest();
 		try {
-//			List<RecursoProjection> recProjection = recursoDao.listarRecursos();
 			List<Recurso> lis = (List<Recurso>) recursoDao.findAll();
 			response.getRecursoResponse().setRecurso(lis);
-//			List<RecursoDto> recursosDto = new ArrayList<RecursoDto>();
-//			for (RecursoProjection r : recProjection) {
-//				RecursoDto rObjDto = new RecursoDto(r.getRec_id(),r.getRec_codigo(),r.getFac_codigo(),r.getRec_descripcion(),r.getRec_capmax(),r.getRec_nombre(),r.getRectipo_codigo(),r.getUbi_codigo());
-//				recursosDto.add(rObjDto);
-//			}
-//			response.getRecursoResponse().setRecursoDto(recursosDto);
 			response.setMetadata("Respuesta ok", "00", "Respuesta exitosa");
 		}catch (Exception e) {
 			response.setMetadata("Respuesta nok", "-1", "Error al consultar");
@@ -113,12 +101,11 @@ public class RecursoServiceImpl implements IRecursoService{
 			
 			Optional<Tiporecurso> tiporecurso = tipoRecursoDao.findById(rectipo_codigo);
 			Optional<Facultad> facultad = facultadDao.findById(fac_codigo);
-//			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
 			
 			if(tiporecurso.isPresent() && facultad.isPresent() ) {
 				recurso.setTiporecurso(tiporecurso.get());
 				recurso.setFacultad(facultad.get());;
-//				recurso.setUbicacion(ubicacion.get());
+				recurso.setUbicacion(facultad.get().getUbicacion());
 			}else {
 				response.setMetadata("respuesta ok", "-1" ,"Tipo recurso, Facultad, Ubicacion no se encuentra");
 				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.NOT_FOUND);
@@ -143,18 +130,17 @@ public class RecursoServiceImpl implements IRecursoService{
 
 	//actualizar recurso
 	@Override
-	public ResponseEntity<RecursoResponseRest> actualizar(Recurso recurso, Long idRecurso,String rectipo_codigo, String fac_codigo, String ubi_codigo) {
+	public ResponseEntity<RecursoResponseRest> actualizar(Recurso recurso, Long idRecurso,String rectipo_codigo, String fac_codigo) {
 		RecursoResponseRest response =  new RecursoResponseRest();
 		List<Recurso> list = new  ArrayList<>();
 		try {
 			Optional<Recurso> recursoSearch = recursoDao.findById(idRecurso);
 			Optional<Tiporecurso> tiporecurso = tipoRecursoDao.findById(rectipo_codigo);
 			Optional<Facultad> facultad = facultadDao.findById(fac_codigo);
-			Optional<Ubicacion> ubicacion = ubicacionDao.findById(ubi_codigo);
-			if(tiporecurso.isPresent() && facultad.isPresent() && ubicacion.isPresent()) {
+			if(tiporecurso.isPresent() && facultad.isPresent()) {
 				recurso.setTiporecurso(tiporecurso.get());
 				recurso.setFacultad(facultad.get());;
-				recurso.setUbicacion(ubicacion.get());
+				recurso.setUbicacion(facultad.get().getUbicacion());
 			}else {
 				response.setMetadata("respuesta ok", "-1" ,"Tipo recurso, Facultad, Ubicacion no se encuentra");
 				return new ResponseEntity<RecursoResponseRest>(response, HttpStatus.NOT_FOUND);
@@ -166,7 +152,7 @@ public class RecursoServiceImpl implements IRecursoService{
 				recursoSearch.get().setRec_descripcion(recurso.getRec_descripcion());
 				recursoSearch.get().setFacultad(facultad.get());
 				recursoSearch.get().setTiporecurso(tiporecurso.get());
-				recursoSearch.get().setUbicacion(ubicacion.get());
+				recursoSearch.get().setUbicacion(facultad.get().getUbicacion());
 
 				
 				Recurso recusoUpdate = recursoDao.save(recursoSearch.get());
