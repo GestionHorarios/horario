@@ -2,8 +2,10 @@ package com.unicauca.edu.co.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.edu.co.model.Horario;
 import com.unicauca.edu.co.model.projection.HorarioProjection;
@@ -24,9 +26,10 @@ public interface IHorarioDao extends CrudRepository<Horario, Long> {
 			+ " FROM horario AS h INNER JOIN curso AS c ON  h.curso_cur_id = c.cur_id INNER JOIN asignatura AS a ON c.asignatura_asig_codigo = a.asig_codigo "
 			+ " WHERE h.hor_dia = ?1 AND h.recurso_rec_id = ?2 ORDER BY h.hor_hora_inicio ASC ")
 	List<HorarioProjection> listaHorarioPorDiaDeUnRecursos(String dia, Long recurso_id);
-	
-	@Query(nativeQuery=true,value ="DELETE FROM horario WHERE recurso_rec_id = ?1")
-	void eliminarHorario(String recurso_id);
+	@Modifying
+	@Transactional	
+	@Query(value ="Delete FROM horario WHERE recurso_rec_id = ?1",nativeQuery=true)
+	void eliminarHorario(Long recurso_id);
 	
 //	deleteByRecursorRec_id();
 }
