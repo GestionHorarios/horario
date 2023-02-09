@@ -117,10 +117,11 @@ public class HorarioServiceImpl  implements IHorarioService{
 
 	//metodo para desagregar horario un recurso una hinicio, hfin, y el curso
 	@Override
-	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(String recurso_id) {
+	
+	public ResponseEntity<HorarioResponseRest> desAsigHorarioaRecurso(Long recurso_id) {
 		HorarioResponseRest response = new HorarioResponseRest();
 		try {
-//			Optional<Horario> horario = horarioDao.findById(horario_id);
+//			Optional<Horario> horario = horarioDao.findById(recurso_id);
 			horarioDao.eliminarHorario(recurso_id);
 			response.setMetadata("respuesta ok", "00", "Horario eliminado");
 		} catch (Exception e) {

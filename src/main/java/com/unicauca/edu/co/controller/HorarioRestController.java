@@ -64,7 +64,7 @@ public class HorarioRestController {
 	//metodo para eliminar un horario de un recurso
 	@DeleteMapping("/horario/desasignarHorDeRecur/{recurso_id}")
 	public ResponseEntity<HorarioResponseRest> retirarHorario(
-			@PathVariable("recurso_id") String recurso_id){
+			@PathVariable("recurso_id") Long recurso_id){
 		ResponseEntity<HorarioResponseRest> response = horarioService.desAsigHorarioaRecurso(recurso_id);
 		return response;
 	}
